@@ -94,9 +94,12 @@
         /* Particles Canvas */
         #particlesCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5; }
 
+/* Circular logo in loader */
 .loader-logo-img {
-    width: 120px;            /* Adjust to your logo size */
-    height: auto;
+    width: 120px;
+    height: 120px;             /* must equal width for perfect circle */
+    border-radius: 50%;
+    object-fit: cover;         /* crop image to fill circle */
     animation: loaderPulse 1.5s ease-in-out infinite;
 }
 
@@ -112,18 +115,15 @@
             -webkit-backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border);
             padding: 0.8rem 2rem; box-shadow: 0 4px 40px rgba(0,0,0,0.4);
         }
-        .nav-logo-img {
-    height: 40px;            /* Adjust height as needed */
-    width: auto;
-    display: block;
-}
-        .nav-logo-img {
+  .nav-logo-img {
     height: 40px;
-    width: auto;
+    width: 40px;               /* equal to height */
+    border-radius: 50%;
+    object-fit: cover;
     display: block;
+    /* optional glow animation */
     animation: logoGlow 3s ease-in-out infinite alternate;
 }
-
 @keyframes logoGlow {
     0% { filter: drop-shadow(0 0 2px rgba(37,99,235,0.3)); }
     100% { filter: drop-shadow(0 0 8px rgba(37,99,235,0.7)); }
