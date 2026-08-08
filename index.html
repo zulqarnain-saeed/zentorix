@@ -94,12 +94,13 @@
         /* Particles Canvas */
         #particlesCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5; }
 
-/* Circular logo in loader */
 .loader-logo-img {
     width: 120px;
-    height: 120px;             /* must equal width for perfect circle */
+    height: 120px;          /* equal to width for perfect circle */
     border-radius: 50%;
-    object-fit: cover;         /* crop image to fill circle */
+    object-fit: cover;      /* ensures the image fills the circle nicely */
+    display: block;
+    margin: 0 auto;         /* 👈 this centers the image horizontally */
     animation: loaderPulse 1.5s ease-in-out infinite;
 }
 
