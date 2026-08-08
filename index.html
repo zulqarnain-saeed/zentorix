@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTORIX | Engineering Digital Excellence</title>
+    <title> ZENTORIX | Engineering Digital Excellence</title>
     <meta name="description" content="Zentorix creates modern websites, software solutions, branding, and digital experiences that help businesses stand out and grow.">
     <meta name="keywords" content="web development, software, branding, digital solutions, Zentorix">
     <meta name="author" content="Zentorix">
@@ -1058,7 +1058,47 @@
             box-shadow: 0 14px 40px rgba(37, 211, 102, 0.55);
         }
 
-        /* Responsive */
+        /* ───── Enhanced responsive fixes ───── */
+
+        /* Stack contact form and info on smaller tablets/phones */
+        @media (max-width: 600px) {
+            .contact-form + div {
+                grid-template-columns: 1fr !important; /* override inline style */
+            }
+            #contact .section-container > div {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Make stats single column on tiny phones (<400px) */
+        @media (max-width: 400px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Newsletter input should not overflow */
+        #newsletterEmail {
+            width: 100%;
+            max-width: 300px;
+        }
+        @media (max-width: 480px) {
+            #newsletterEmail {
+                max-width: 100%;
+                min-width: auto;
+            }
+            #newsletterBox {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #newsletterBtn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Responsive (existing) */
         @media (max-width: 1024px) {
             .portfolio-grid {
                 columns: 2;
@@ -1152,7 +1192,7 @@
     <!-- Loader -->
     <div class="loader" id="loader">
         <div class="loader-content">
-            <div class="loader-logo">Zentorix</div>
+            <div class="loader-logo">ZENTORIX</div>
             <div class="loader-bar"><div class="loader-bar-inner"></div></div>
         </div>
     </div>
@@ -1161,7 +1201,7 @@
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Particles -->
+    <!-- Particles Canvas (disabled on touch devices for performance) -->
     <canvas id="particlesCanvas"></canvas>
 
     <!-- Floating Shapes -->
@@ -1171,7 +1211,7 @@
 
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
-        <a href="#home" class="nav-logo">ZENTORIX</a>
+        <a href="#home" class="nav-logo">Zentorix</a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -1373,13 +1413,13 @@
                 </div>
                 <div class="testimonial-card glass-card">
                     <div class="stars">★★★★★</div>
-                    <p>"Professional, innovative, and incredibly responsive. ZAQ delivered beyond our expectations on every milestone."</p>
+                    <p>"Professional, innovative, and incredibly responsive. Zentorix delivered beyond our expectations on every milestone."</p>
                     <div class="testimonial-author">Zain Ali</div>
                     <div class="testimonial-role">Founder, EduPlatform</div>
                 </div>
                 <div class="testimonial-card glass-card">
                     <div class="stars">★★★★★</div>
-                    <p>"Our restaurant's online ordering system built by ZAQ increased revenue by 40% in just two months. Highly recommended!"</p>
+                    <p>"Our restaurant's online ordering system built by Zentorix increased revenue by 40% in just two months. Highly recommended!"</p>
                     <div class="testimonial-author">Fatima Raza</div>
                     <div class="testimonial-role">Owner, Bistro Luxe</div>
                 </div>
@@ -1530,7 +1570,7 @@
                 <div style="display:flex;flex-direction:column;gap:1.5rem;">
                     <div class="glass-card" style="padding:1.5rem;">
                         <i class="fas fa-envelope" style="color:var(--primary-light);font-size:1.5rem;"></i>
-                        <p style="margin-top:0.5rem;font-weight:600;">technologies@zaq.world</p>
+                        <p style="margin-top:0.5rem;font-weight:600;">info@zentorix.com</p>
                     </div>
                     <div class="glass-card" style="padding:1.5rem;">
                         <i class="fas fa-phone" style="color:var(--secondary-light);font-size:1.5rem;"></i>
@@ -1565,7 +1605,7 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <div class="footer-logo">ZAQ</div>
+                <div class="footer-logo">Zentorix</div>
                 <p style="color:var(--text-secondary);font-size:0.85rem;margin-top:0.8rem;">Engineering Digital Excellence. Helping businesses grow through modern websites, software, branding, and digital innovation.</p>
                 <div style="display:flex;gap:1rem;margin-top:1.5rem;">
                     <a href="#" style="font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
@@ -1659,73 +1699,78 @@
             });
         });
 
-        // Particles
+        // Particles (disabled on touch devices for performance)
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         const canvas = document.getElementById('particlesCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        if (isTouchDevice) {
+            canvas.style.display = 'none';
+        } else {
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            class Particle {
+                constructor() {
                     this.reset();
                 }
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(37,99,235,${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 80; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(37,99,235,${0.06 * (1 - dist/120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                        this.reset();
                     }
                 }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(37,99,235,${this.opacity})`;
+                    ctx.fill();
+                }
             }
-            requestAnimationFrame(animateParticles);
+
+            for (let i = 0; i < 80; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(37,99,235,${0.06 * (1 - dist/120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
         }
-        animateParticles();
 
         // Navbar scroll
         const navbar = document.getElementById('navbar');
