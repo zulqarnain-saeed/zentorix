@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Zentorix | Engineering Digital Excellence</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <meta name="description" content="Zentorix creates modern websites, software solutions, branding, and digital experiences that help businesses stand out and grow.">
     <meta name="keywords" content="web development, software, branding, digital solutions, Zentorix">
     <meta name="author" content="Zentorix">
@@ -85,7 +86,6 @@
         /* Loader */
         .loader { position: fixed; inset: 0; background: var(--bg); z-index: 100000; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s ease; }
         .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-logo { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; letter-spacing: -2px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: loaderPulse 1.5s ease-in-out infinite; }
         .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 1.5rem auto 0; overflow: hidden; }
         .loader-bar-inner { height: 100%; background: var(--gradient-1); border-radius: 10px; animation: loaderBar 1.4s ease-in-out infinite; width: 0; }
         @keyframes loaderPulse { 0%,100% { opacity:0.6; transform:scale(0.96); } 50% { opacity:1; transform:scale(1.04); } }
@@ -94,6 +94,13 @@
         /* Particles Canvas */
         #particlesCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5; }
 
+.loader-logo-img {
+    width: 120px;            /* Adjust to your logo size */
+    height: auto;
+    animation: loaderPulse 1.5s ease-in-out infinite;
+}
+
+        
         /* ───── NAVBAR ───── */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
@@ -105,6 +112,22 @@
             -webkit-backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border);
             padding: 0.8rem 2rem; box-shadow: 0 4px 40px rgba(0,0,0,0.4);
         }
+        .nav-logo-img {
+    height: 40px;            /* Adjust height as needed */
+    width: auto;
+    display: block;
+}
+        .nav-logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    0% { filter: drop-shadow(0 0 2px rgba(37,99,235,0.3)); }
+    100% { filter: drop-shadow(0 0 8px rgba(37,99,235,0.7)); }
+}
         .nav-logo {
             font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800;
             letter-spacing: -1px; text-decoration: none; background: var(--gradient-1);
@@ -351,9 +374,10 @@
     <!-- Loader -->
     <div class="loader" id="loader">
         <div class="loader-content">
-            <div class="loader-logo">ZENTORIX</div>
-            <div class="loader-bar"><div class="loader-bar-inner"></div></div>
-        </div>
+          <div class="loader-content">
+    <img src="logo.png" alt="Zentorix" class="loader-logo-img">
+    <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+</div>
     </div>
 
     <!-- Custom Cursor (only non‑touch) -->
@@ -365,7 +389,9 @@
 
     <!-- ───── NAVIGATION ───── -->
     <nav class="navbar" id="navbar">
-        <a href="#home" class="nav-logo">ZENTORIX</a>
+       <a href="#home" class="nav-logo">
+    <img src="logo.png" alt="Zentorix" class="nav-logo-img">
+</a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
