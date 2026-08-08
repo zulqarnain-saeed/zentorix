@@ -1,888 +1,1945 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Zentorix | Engineering Digital Excellence</title>
-   <link rel="icon" type="image/png" href="logo.png?v=2">
-    <meta name="description" content="Zentorix creates modern websites, software solutions, branding, and digital experiences that help businesses stand out and grow.">
-    <meta name="keywords" content="web development, software, branding, digital solutions, Zentorix">
-    <meta name="author" content="Zentorix">
-    <meta property="og:title" content="Zentorix | Engineering Digital Excellence">
-    <meta property="og:description" content="Modern websites, software solutions, branding, and digital experiences.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#050816">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2563EB;
-            --primary-light: #3B82F6;
-            --primary-dark: #1D4ED8;
-            --secondary: #06B6D4;
-            --secondary-light: #22D3EE;
-            --accent: #8B5CF6;
-            --accent-light: #A78BFA;
-            --bg: #050816;
-            --bg-secondary: #0A0F1F;
-            --glass: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-hover: rgba(255, 255, 255, 0.08);
-            --text: #FFFFFF;
-            --text-secondary: #B0B8CC;
-            --text-muted: #6B7280;
-            --gradient-1: linear-gradient(135deg, #2563EB, #06B6D4);
-            --gradient-2: linear-gradient(135deg, #8B5CF6, #2563EB);
-            --gradient-3: linear-gradient(135deg, #06B6D4, #8B5CF6);
-            --gradient-hero: linear-gradient(180deg, rgba(37, 99, 235, 0.08) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 100%);
-            --shadow-glow: 0 0 60px rgba(37, 99, 235, 0.15);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font-primary: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            --font-heading: 'Space Grotesk', 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Zentorix | Engineering Digital Excellence</title>
+  <link rel="icon" type="image/png" href="logo.png?v=2" />
+  <meta name="description" content="Zentorix creates modern websites, software solutions, branding, and digital experiences that help businesses stand out and grow." />
+  <meta name="keywords" content="web development, software, branding, digital solutions, Zentorix" />
+  <meta name="author" content="Zentorix" />
+  <meta property="og:title" content="Zentorix | Engineering Digital Excellence" />
+  <meta property="og:description" content="Modern websites, software solutions, branding, and digital experiences." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#050816" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* ═══════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════ */
+    :root {
+      --primary:        #2563EB;
+      --primary-light:  #60A5FA;
+      --primary-dark:   #1D4ED8;
+      --secondary:      #06B6D4;
+      --secondary-light:#22D3EE;
+      --accent:         #8B5CF6;
+      --accent-light:   #A78BFA;
+      --success:        #10B981;
+      --warning:        #F59E0B;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-            font-size: 16px;
-        }
-        body {
-            font-family: var(--font-primary);
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        body.loading {
-            overflow: hidden;
-        }
+      --bg:             #050816;
+      --bg-secondary:   #080d1a;
+      --bg-card:        rgba(255,255,255,0.03);
+      --bg-card-hover:  rgba(255,255,255,0.06);
+      --glass:          rgba(255,255,255,0.04);
+      --glass-border:   rgba(255,255,255,0.08);
+      --glass-hover:    rgba(255,255,255,0.08);
+      --glass-strong:   rgba(255,255,255,0.06);
 
-        /* Custom Cursor (only non‑touch) */
-        @media (hover: hover) and (pointer: fine) {
-            .cursor-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 99999; mix-blend-mode: difference; }
-            .cursor-ring { width: 36px; height: 36px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; mix-blend-mode: difference; transition: all 0.15s ease; }
-        }
-        @media (max-width: 768px), (hover: none) {
-            .cursor-dot, .cursor-ring { display: none; }
-        }
+      --text:           #FFFFFF;
+      --text-secondary: #94A3B8;
+      --text-muted:     #475569;
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+      --grad-primary:   linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+      --grad-accent:    linear-gradient(135deg, #8B5CF6 0%, #2563EB 100%);
+      --grad-warm:      linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
+      --grad-hero-text: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+      --grad-mesh:      radial-gradient(ellipse 80% 80% at 50% -20%,rgba(37,99,235,.22),transparent),
+                        radial-gradient(ellipse 60% 60% at 80% 60%,rgba(139,92,246,.14),transparent),
+                        radial-gradient(ellipse 60% 60% at 20% 80%,rgba(6,182,212,.12),transparent);
 
-        /* Loader */
-        .loader { position: fixed; inset: 0; background: var(--bg); z-index: 100000; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s ease; }
-        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 1.5rem auto 0; overflow: hidden; }
-        .loader-bar-inner { height: 100%; background: var(--gradient-1); border-radius: 10px; animation: loaderBar 1.4s ease-in-out infinite; width: 0; }
-        @keyframes loaderPulse { 0%,100% { opacity:0.6; transform:scale(0.96); } 50% { opacity:1; transform:scale(1.04); } }
-        @keyframes loaderBar { 0% { width:0; margin-left:0; } 50% { width:70%; margin-left:15%; } 100% { width:0; margin-left:100%; } }
+      --glow-blue:      0 0 60px rgba(37,99,235,.25);
+      --glow-accent:    0 0 60px rgba(139,92,246,.25);
+      --shadow-card:    0 24px 48px rgba(0,0,0,.35);
+      --shadow-sm:      0 4px 16px rgba(0,0,0,.25);
 
-        /* Particles Canvas */
-        #particlesCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5; }
+      --radius-lg: 20px;
+      --radius:    14px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
 
-.loader-logo-img {
-    width: 120px;
-    height: 120px;          /* equal to width for perfect circle */
-    border-radius: 50%;
-    object-fit: cover;      /* ensures the image fills the circle nicely */
-    display: block;
-    margin: 0 auto;         /* 👈 this centers the image horizontally */
-    animation: loaderPulse 1.5s ease-in-out infinite;
-}
+      --ease:        cubic-bezier(.25,.46,.45,.94);
+      --ease-spring: cubic-bezier(.34,1.56,.64,1);
+      --t:           .35s;
 
-        
-        /* ───── NAVBAR ───── */
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-            padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
-            background: transparent; transition: var(--transition);
-        }
-        .navbar.scrolled {
-            background: rgba(5,8,22,0.85); backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border);
-            padding: 0.8rem 2rem; box-shadow: 0 4px 40px rgba(0,0,0,0.4);
-        }
-  .nav-logo-img {
-    height: 40px;
-    width: 40px;               /* equal to height */
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    /* optional glow animation */
-    animation: logoGlow 3s ease-in-out infinite alternate;
-}
-@keyframes logoGlow {
-    0% { filter: drop-shadow(0 0 2px rgba(37,99,235,0.3)); }
-    100% { filter: drop-shadow(0 0 8px rgba(37,99,235,0.7)); }
-}
-        .nav-logo {
-            font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800;
-            letter-spacing: -1px; text-decoration: none; background: var(--gradient-1);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; z-index: 10;
-        }
-        /* Desktop nav links */
-        .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; z-index: 10; }
-        .nav-links a {
-            text-decoration: none; color: var(--text-secondary); font-weight: 500;
-            font-size: 0.85rem; letter-spacing: 0.5px; transition: var(--transition);
-            position: relative; padding: 6px 0; white-space: nowrap;
-        }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background: var(--gradient-1); border-radius: 2px; transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .nav-cta {
-            background: var(--gradient-1) !important; color: #fff !important;
-            padding: 10px 22px !important; border-radius: 50px !important;
-            font-weight: 600 !important; font-size: 0.8rem !important;
-            letter-spacing: 0.5px !important; transition: var(--transition) !important;
-            border: none !important; white-space: nowrap !important;
-        }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,99,235,0.4); }
-        .nav-cta::after { display: none !important; }
+      --font:       'Plus Jakarta Sans','Inter',sans-serif;
+      --font-head:  'Space Grotesk','Inter',sans-serif;
+      --font-mono:  'JetBrains Mono',monospace;
+    }
 
-        /* Hamburger (hidden on desktop) */
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px; cursor: pointer;
-            z-index: 10001; background: none; border: none; padding: 8px;
-        }
-        .hamburger span {
-            display: block; width: 26px; height: 2px; background: #fff;
-            border-radius: 3px; transition: var(--transition);
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    /* ═══════════════════════════
+       RESET & BASE
+    ═══════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Sidebar (mobile only) */
-        .sidebar {
-            position: fixed; top: 0; right: 0; width: 280px; max-width: 80vw;
-            height: 100%; background: rgba(10, 15, 31, 0.98); backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); z-index: 10000;
-            transform: translateX(100%); transition: transform 0.3s ease;
-            display: flex; flex-direction: column; padding: 5rem 2rem 2rem;
-            border-left: 1px solid var(--glass-border);
-        }
-        .sidebar.active { transform: translateX(0); }
-        .sidebar a {
-            text-decoration: none; color: #fff; font-size: 1.2rem; font-weight: 600;
-            font-family: var(--font-heading); padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-            letter-spacing: -0.3px; transition: color 0.2s;
-        }
-        .sidebar a:hover { color: var(--secondary-light); }
-        .sidebar .sidebar-cta {
-            margin-top: 1.5rem; background: var(--gradient-1); color: #fff;
-            padding: 12px 24px; border-radius: 50px; font-weight: 600;
-            font-size: 0.9rem; text-align: center; display: inline-block;
-            border: none; letter-spacing: 0.5px;
-        }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+      font-size: 16px;
+    }
 
-        /* Backdrop */
-        .sidebar-backdrop {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-            z-index: 9999; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .sidebar-backdrop.active { opacity: 1; pointer-events: auto; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Show hamburger on smaller screens */
-        @media (max-width: 1024px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-        }
-        /* Hide sidebar on desktop */
-        @media (min-width: 1025px) {
-            .sidebar, .sidebar-backdrop { display: none; }
-        }
+    body.no-scroll { overflow: hidden; }
 
-        /* ───── SECTIONS ───── */
-        section { position: relative; z-index: 1; padding: 5rem 1.5rem; }
-        @media (min-width: 768px) { section { padding: 7rem 3rem; } }
-        .section-container { max-width: 1280px; margin: 0 auto; width: 100%; }
-        .section-tag { display: inline-block; font-weight: 600; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary-light); margin-bottom: 1rem; font-family: var(--font-mono); }
-        .section-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1rem; color: #fff; }
-        .section-subtitle { color: var(--text-secondary); font-size: 1rem; max-width: 600px; line-height: 1.7; }
-        .section-line { width: 50px; height: 3px; background: var(--gradient-1); border-radius: 3px; margin-bottom: 2rem; }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    button { cursor: pointer; font-family: var(--font); }
 
-        /* Glass Card */
-        .glass-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: var(--transition); }
-        .glass-card:hover { background: var(--glass-hover); border-color: rgba(255,255,255,0.15); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        /* Buttons */
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer; border: none; transition: var(--transition); font-family: var(--font-primary); white-space: nowrap; justify-content: center; }
-        .btn-primary { background: var(--gradient-1); color: #fff; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,99,235,0.45); }
-        .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
-        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); transform: translateY(-3px); }
-        .btn-accent { background: var(--gradient-2); color: #fff; }
-        .btn-accent:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139,92,246,0.45); }
+    /* ═══════════════════════════
+       SELECTION
+    ═══════════════════════════ */
+    ::selection { background: rgba(37,99,235,.35); color: #fff; }
 
-        /* Hero */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; padding: 6rem 1.5rem 4rem; background: var(--gradient-hero); overflow: hidden; }
-        .hero-content { text-align: center; max-width: 850px; z-index: 2; width: 100%; }
-        .hero-badge { display: inline-block; background: rgba(37,99,235,0.15); color: var(--primary-light); font-weight: 600; font-size: 0.8rem; letter-spacing: 2px; padding: 10px 20px; border-radius: 50px; margin-bottom: 2rem; border: 1px solid rgba(37,99,235,0.3); font-family: var(--font-mono); }
-        .hero-title { font-family: var(--font-heading); font-size: clamp(2rem, 5.5vw, 4.5rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(180deg, #FFFFFF 0%, #B0B8CC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-subtitle { font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    /* ═══════════════════════════
+       CUSTOM CURSOR
+    ═══════════════════════════ */
+    @media (hover:hover) and (pointer:fine) {
+      .c-dot  { width:8px; height:8px; background:#fff; border-radius:50%; position:fixed; pointer-events:none; z-index:99999; mix-blend-mode:difference; transform:translate(-50%,-50%); transition:width .15s,height .15s; }
+      .c-ring { width:36px; height:36px; border:1.5px solid rgba(255,255,255,.4); border-radius:50%; position:fixed; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); transition:width .15s,height .15s,border-color .15s; }
+      body.cursor-grow .c-ring { width:56px; height:56px; border-color:rgba(37,99,235,.8); }
+    }
 
-        /* Floating shapes (contained inside hero) */
-        .floating-shape { position: absolute; border-radius: 50%; pointer-events: none; animation: floatShape 20s ease-in-out infinite; opacity: 0.5; filter: blur(60px); z-index: 0; }
-        .floating-shape.s1 { width: 400px; height: 400px; background: rgba(37,99,235,0.2); top: -10%; left: -8%; }
-        .floating-shape.s2 { width: 300px; height: 300px; background: rgba(139,92,246,0.18); bottom: -8%; right: -5%; }
-        .floating-shape.s3 { width: 200px; height: 200px; background: rgba(6,182,212,0.2); top: 40%; right: 15%; animation-delay: -12s; animation-duration: 16s; }
-        @keyframes floatShape { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(40px,-30px) scale(1.1); } 50% { transform: translate(-20px,25px) scale(0.9); } 75% { transform: translate(-35px,-20px) scale(1.05); } }
+    /* ═══════════════════════════
+       LOADER
+    ═══════════════════════════ */
+    .loader {
+      position:fixed; inset:0; background:var(--bg); z-index:100000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem;
+      transition:opacity .6s ease, visibility .6s ease;
+    }
+    .loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    .loader-logo  { width:80px; height:80px; border-radius:50%; object-fit:cover; animation:lPulse 1.4s ease-in-out infinite; }
+    .loader-word  { font-family:var(--font-head); font-size:1.4rem; font-weight:800; letter-spacing:-1px; background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .loader-bar   { width:180px; height:3px; background:rgba(255,255,255,.08); border-radius:99px; overflow:hidden; }
+    .loader-fill  { height:100%; background:var(--grad-primary); border-radius:99px; animation:lBar 1.4s ease-in-out infinite; }
+    @keyframes lPulse { 0%,100%{opacity:.7;transform:scale(.96)} 50%{opacity:1;transform:scale(1.04)} }
+    @keyframes lBar   { 0%{width:0;margin-left:0} 50%{width:65%;margin-left:17%} 100%{width:0;margin-left:100%} }
 
-        /* Stats */
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; text-align: center; }
-        @media (min-width: 640px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-        .stat-item h3 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .stat-item p { color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+    /* ═══════════════════════════
+       PARTICLES
+    ═══════════════════════════ */
+    #particlesCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.4; }
 
-        /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
-        .service-card { padding: 2rem 1.5rem; text-align: left; }
-        .service-card .icon { font-size: 2.2rem; margin-bottom: 1rem; display: inline-block; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .service-card h3 { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .service-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
-        .service-card .service-link { color: var(--primary-light); font-weight: 600; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; }
-        .service-card .service-link:hover { gap: 12px; }
+    /* ═══════════════════════════
+       MESH BACKGROUND
+    ═══════════════════════════ */
+    .mesh-bg {
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background:var(--grad-mesh);
+      animation:meshShift 20s ease-in-out infinite alternate;
+    }
+    @keyframes meshShift {
+      0%   { transform:translateY(0) scale(1); }
+      50%  { transform:translateY(-30px) scale(1.04); }
+      100% { transform:translateY(0) scale(1); }
+    }
 
-        /* Portfolio */
-        .portfolio-grid { columns: 1; column-gap: 1.5rem; }
-        @media (min-width: 640px) { .portfolio-grid { columns: 2; } }
-        @media (min-width: 1024px) { .portfolio-grid { columns: 3; } }
-        .portfolio-item { break-inside: avoid; margin-bottom: 1.5rem; border-radius: var(--radius); overflow: hidden; position: relative; }
-        .portfolio-item img { width: 100%; display: block; border-radius: var(--radius); transition: transform 0.6s; }
-        .portfolio-item:hover img { transform: scale(1.05); }
-        .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(255, 255, 255, 0.9) 100%);
- display: flex; align-items: flex-end; padding: 1.5rem; border-radius: var(--radius); opacity: 0; transition: opacity 0.3s; }
-        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-        .portfolio-overlay h4 { font-family: var(--font-heading); font-weight: 700; }
-.portfolio-placeholder {
-    aspect-ratio: 4 / 3;
-    background: var(--glass);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-}
+    /* ═══════════════════════════
+       NAVBAR
+    ═══════════════════════════ */
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:9999;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.1rem 2rem;
+      transition:background var(--t) var(--ease), padding var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+    .navbar.scrolled {
+      background:rgba(5,8,22,.88);
+      backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
+      border-bottom:1px solid var(--glass-border);
+      padding:.8rem 2rem;
+      box-shadow:0 8px 48px rgba(0,0,0,.35);
+    }
 
-.portfolio-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-        /* Process */
-        .process-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; position: relative; }
-        @media (min-width: 480px) { .process-steps { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 768px) { .process-steps { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
-        .process-step { text-align: center; padding: 1.5rem 0.5rem; }
-        .process-step .step-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.3rem; }
-        .process-step h4 { font-family: var(--font-heading); font-weight: 600; margin-bottom: 0.2rem; }
-        .process-step p { color: var(--text-secondary); font-size: 0.8rem; }
-        .process-line { display: none; }
-        @media (min-width: 1024px) { .process-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--glass-border); z-index: 0; display: block; } }
+    /* Logo */
+    .nav-logo {
+      display:flex; align-items:center; gap:.7rem;
+      font-family:var(--font-head); font-size:1.4rem; font-weight:800;
+      letter-spacing:-1px; z-index:10;
+      background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .nav-logo-img {
+      width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0;
+      box-shadow:0 0 0 2px rgba(37,99,235,.4);
+      animation:logoGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes logoGlow {
+      0%  { box-shadow:0 0 0 2px rgba(37,99,235,.3), 0 0 12px rgba(37,99,235,.2); }
+      100%{ box-shadow:0 0 0 2px rgba(37,99,235,.7), 0 0 24px rgba(37,99,235,.5); }
+    }
 
-        /* Testimonials */
-        .testimonials-scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 1rem 0; -webkit-overflow-scrolling: touch; }
-        .testimonial-card { min-width: 280px; max-width: 400px; flex-shrink: 0; scroll-snap-align: start; padding: 2rem; }
-        .testimonial-card .stars { color: #F0B90B; letter-spacing: 3px; margin-bottom: 1rem; }
-        .testimonial-card p { color: var(--text-secondary); font-style: italic; line-height: 1.7; margin-bottom: 1rem; font-size: 0.95rem; }
-        .testimonial-author { font-weight: 700; font-family: var(--font-heading); }
-        .testimonial-role { font-size: 0.8rem; color: var(--text-muted); }
+    /* Desktop links */
+    .nav-links { display:flex; align-items:center; gap:1.5rem; z-index:10; }
+    .nav-links a {
+      color:var(--text-secondary); font-weight:500; font-size:.84rem;
+      letter-spacing:.3px; transition:color var(--t); position:relative; padding:4px 0;
+      white-space:nowrap;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px;
+      background:var(--grad-primary); border-radius:2px; transition:width .3s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active { color:#fff; }
+    .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
 
-        /* Pricing */
-        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: stretch; }
-        @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
-        .pricing-card { padding: 2.5rem 2rem; text-align: center; position: relative; }
-        .pricing-card.featured { border-color: rgba(37,99,235,0.5); box-shadow: var(--shadow-glow); transform: none; }
-        @media (min-width: 1024px) { .pricing-card.featured { transform: scale(1.03); } }
-        .pricing-card .price { font-family: var(--font-heading); font-size: 2.8rem; font-weight: 800; margin: 1rem 0; }
-        .pricing-card .price span { font-size: 1rem; font-weight: 400; color: var(--text-secondary); }
-        .pricing-card ul { list-style: none; text-align: left; margin: 1.5rem 0; }
-        .pricing-card ul li { padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
-        .pricing-card ul li i { color: #10B981; }
-        .pricing-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gradient-2); color: #fff; padding: 6px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
+    .nav-cta {
+      padding:9px 22px !important;
+      background:var(--grad-primary) !important; color:#fff !important;
+      border-radius:50px !important; font-weight:700 !important; font-size:.82rem !important;
+      letter-spacing:.5px !important; border:none !important; white-space:nowrap !important;
+      transition:transform var(--t), box-shadow var(--t) !important;
+    }
+    .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,99,235,.5) !important; }
+    .nav-cta::after { display:none !important; }
 
-        /* Blog */
-        .blog-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
-        .blog-card { overflow: hidden; }
-        .blog-card-image { aspect-ratio: 16/10; background: var(--glass); display: flex; align-items: center; justify-content: center; font-size: 3rem; border-radius: var(--radius) var(--radius) 0 0; }
-        .blog-card-content { padding: 1.5rem; }
-        .blog-card-content .category { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-light); font-family: var(--font-mono); }
-        .blog-card-content h4 { font-family: var(--font-heading); font-weight: 700; margin: 0.5rem 0; font-size: 1.1rem; }
-        .blog-card-content p { color: var(--text-secondary); font-size: 0.85rem; }
+    /* Hamburger */
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      z-index:10001; background:none; border:none; padding:6px;
+    }
+    .hamburger span {
+      display:block; width:24px; height:2px; background:#fff;
+      border-radius:3px; transition:var(--t);
+    }
+    .hamburger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2){ opacity:0; transform:translateX(-12px); }
+    .hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(5px,-5px); }
 
-        /* FAQ */
-        .faq-item { border-bottom: 1px solid var(--glass-border); padding: 1.2rem 0; cursor: pointer; }
-        .faq-question { font-weight: 600; font-family: var(--font-heading); display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; }
-        .faq-question i { transition: transform 0.2s; color: var(--primary-light); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
-        .faq-item.active .faq-answer { max-height: 300px; padding-top: 0.8rem; }
-        .faq-item.active .faq-question i { transform: rotate(45deg); }
+    /* Sidebar */
+    .sidebar {
+      position:fixed; top:0; right:0; width:280px; max-width:80vw; height:100%;
+      background:rgba(8,13,26,.98); backdrop-filter:blur(24px);
+      z-index:10000; transform:translateX(110%); transition:transform .32s var(--ease);
+      display:flex; flex-direction:column; padding:5.5rem 2rem 2rem;
+      border-left:1px solid var(--glass-border); gap:4px;
+    }
+    .sidebar.active { transform:translateX(0); }
+    .sidebar a {
+      color:var(--text-secondary); font-size:1rem; font-weight:600;
+      font-family:var(--font-head); padding:.75rem 1rem; border-radius:var(--radius-sm);
+      transition:color .2s, background .2s;
+    }
+    .sidebar a:hover { color:#fff; background:var(--glass); }
+    .sidebar-cta {
+      margin-top:.5rem; background:var(--grad-primary) !important; color:#fff !important;
+      border-radius:50px !important; text-align:center !important; font-weight:700 !important; font-size:.9rem !important;
+    }
+    .sidebar-backdrop {
+      position:fixed; inset:0; background:rgba(0,0,0,.7);
+      z-index:9998; opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .sidebar-backdrop.active { opacity:1; pointer-events:auto; }
 
-        /* Contact */
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
-        @media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
-        .contact-form input, .contact-form textarea, .contact-form select {
-            width: 100%; padding: 14px 18px; background: var(--glass);
-            border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
-            color: #fff; font-family: var(--font-primary); font-size: 0.9rem;
-            transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-        }
-        .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
-            border-color: var(--primary); box-shadow: 0 0 20px rgba(37,99,235,0.2);
-        }
-        .contact-form textarea { min-height: 140px; resize: vertical; }
-        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    @media (max-width:1080px) { .nav-links { display:none; } .hamburger { display:flex; } }
+    @media (min-width:1081px) { .sidebar, .sidebar-backdrop { display:none !important; } }
 
-        /* Newsletter */
-        .newsletter-box { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
-        @media (max-width: 480px) { .newsletter-box { flex-direction: column; align-items: stretch; } }
-        #newsletterEmail { padding: 14px 20px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 50px; color: #fff; font-family: var(--font-primary); font-size: 0.9rem; min-width: 220px; outline: none; flex: 1; }
+    /* ═══════════════════════════
+       UTILITY
+    ═══════════════════════════ */
+    .container { max-width:1260px; margin:0 auto; width:100%; padding:0 1.5rem; }
+    @media (min-width:768px) { .container { padding:0 2.5rem; } }
 
-        /* Footer */
-        footer { background: var(--bg-secondary); border-top: 1px solid var(--glass-border); padding: 4rem 1.5rem 2rem; }
-        @media (min-width: 768px) { footer { padding: 4rem 3rem 2rem; } }
-        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1280px; margin: 0 auto; }
-        @media (min-width: 480px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; } }
-        .footer-logo { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        footer h5 { font-family: var(--font-heading); font-weight: 600; margin-bottom: 1rem; }
-        footer a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; display: block; margin-bottom: 0.6rem; transition: color 0.2s; }
-        footer a:hover { color: #fff; }
+    section { position:relative; z-index:1; padding:5rem 1.5rem; }
+    @media (min-width:768px) { section { padding:7rem 2.5rem; } }
 
-        /* Back to Top & Floating CTA */
-        .back-to-top, .floating-cta { position: fixed; bottom: 30px; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9990; border: none; font-size: 1.2rem; transition: var(--transition); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .back-to-top { right: 30px; background: var(--gradient-1); color: #fff; opacity: 0; visibility: hidden; }
-        .back-to-top.visible { opacity: 1; visibility: visible; }
-        .floating-cta { left: 30px; background: #25D366; color: #fff; text-decoration: none; }
-        .back-to-top:hover, .floating-cta:hover { transform: translateY(-4px); }
+    .tag {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(37,99,235,.12); border:1px solid rgba(37,99,235,.25);
+      color:var(--primary-light); font-weight:600; font-size:.72rem;
+      letter-spacing:3px; text-transform:uppercase; padding:7px 16px;
+      border-radius:50px; margin-bottom:1.2rem; font-family:var(--font-mono);
+    }
+    .tag::before { content:''; width:6px; height:6px; background:var(--primary-light); border-radius:50%; }
 
-        /* Fade animation */
-        .fade-up { opacity: 0; transform: translateY(25px); transition: all 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-    </style>
+    .section-title {
+      font-family:var(--font-head); font-size:clamp(2rem,4.5vw,3.2rem);
+      font-weight:800; letter-spacing:-2px; line-height:1.1;
+      margin-bottom:1rem; color:#fff;
+    }
+
+    .section-sub { color:var(--text-secondary); font-size:1rem; max-width:560px; line-height:1.75; margin-bottom:3.5rem; }
+
+    .rule { width:48px; height:3px; background:var(--grad-primary); border-radius:99px; margin-bottom:1.5rem; }
+
+    /* Gradient text */
+    .grad { background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .grad-accent { background:var(--grad-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    /* Buttons */
+    .btn {
+      display:inline-flex; align-items:center; gap:8px; padding:14px 30px;
+      border-radius:50px; font-weight:700; font-size:.88rem; letter-spacing:.4px;
+      cursor:pointer; border:none; transition:transform var(--t), box-shadow var(--t);
+      font-family:var(--font); white-space:nowrap; justify-content:center;
+    }
+    .btn-primary { background:var(--grad-primary); color:#fff; }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 40px rgba(37,99,235,.5); }
+    .btn-outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.25); }
+    .btn-outline:hover { border-color:rgba(255,255,255,.6); background:rgba(255,255,255,.05); transform:translateY(-2px); }
+    .btn-accent  { background:var(--grad-accent); color:#fff; }
+    .btn-accent:hover  { transform:translateY(-3px); box-shadow:0 14px 40px rgba(139,92,246,.5); }
+    .btn-ghost  { background:var(--glass); color:#fff; border:1px solid var(--glass-border); }
+    .btn-ghost:hover  { background:var(--glass-hover); transform:translateY(-2px); }
+    .btn-sm { padding:10px 22px; font-size:.82rem; }
+
+    /* Glass card */
+    .card {
+      background:var(--bg-card); border:1px solid var(--glass-border);
+      border-radius:var(--radius); backdrop-filter:blur(20px);
+      transition:transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t), background var(--t);
+    }
+    .card:hover {
+      background:var(--bg-card-hover); border-color:rgba(255,255,255,.14);
+      transform:translateY(-6px); box-shadow:var(--shadow-card);
+    }
+
+    /* ═══════════════════════════
+       HERO
+    ═══════════════════════════ */
+    .hero {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      position:relative; z-index:1; padding:6rem 1.5rem 4rem; overflow:hidden;
+      background:linear-gradient(180deg,rgba(37,99,235,.07) 0%,rgba(139,92,246,.04) 50%,transparent 100%);
+    }
+    .hero-orb {
+      position:absolute; border-radius:50%; pointer-events:none; filter:blur(80px);
+      animation:orbFloat 18s ease-in-out infinite;
+    }
+    .hero-orb.o1 { width:520px; height:520px; background:rgba(37,99,235,.18); top:-12%; left:-10%; }
+    .hero-orb.o2 { width:380px; height:380px; background:rgba(139,92,246,.15); bottom:-10%; right:-8%; animation-delay:-9s; }
+    .hero-orb.o3 { width:260px; height:260px; background:rgba(6,182,212,.18); top:50%; right:18%; animation-delay:-5s; animation-duration:14s; }
+    @keyframes orbFloat {
+      0%,100%{ transform:translate(0,0) scale(1); }
+      33%    { transform:translate(40px,-40px) scale(1.08); }
+      66%    { transform:translate(-25px,30px) scale(.93); }
+    }
+
+    .hero-content { text-align:center; max-width:860px; position:relative; z-index:2; width:100%; }
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(37,99,235,.1); border:1px solid rgba(37,99,235,.25);
+      color:var(--primary-light); font-weight:600; font-size:.75rem; letter-spacing:2.5px;
+      padding:9px 20px; border-radius:50px; margin-bottom:2rem; font-family:var(--font-mono);
+    }
+    .eyebrow-dot { width:7px; height:7px; background:var(--primary-light); border-radius:50%; animation:dotPulse 1.5s ease-in-out infinite; }
+    @keyframes dotPulse { 0%,100%{ opacity:.6; transform:scale(.8); } 50%{ opacity:1; transform:scale(1.2); } }
+
+    .hero-title {
+      font-family:var(--font-head); font-size:clamp(2.2rem,6vw,5rem);
+      font-weight:900; letter-spacing:-3px; line-height:1.08;
+      margin-bottom:1.5rem;
+      background:var(--grad-hero-text); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+
+    .typed-wrap { display:block; min-height:1.2em; }
+    .typed-text { color:var(--primary-light); -webkit-text-fill-color:var(--primary-light); }
+    .cursor-blink { display:inline-block; width:3px; height:.9em; background:var(--primary-light); border-radius:2px; margin-left:3px; vertical-align:-.1em; animation:blink .8s step-start infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-sub { font-size:1.05rem; color:var(--text-secondary); margin-bottom:2.5rem; max-width:580px; margin-left:auto; margin-right:auto; line-height:1.8; }
+    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:3.5rem; }
+
+    /* Trust strip */
+    .trust-strip { display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; opacity:.6; }
+    .trust-strip span { font-size:.78rem; color:var(--text-secondary); display:flex; align-items:center; gap:6px; }
+    .trust-strip span i { color:var(--primary-light); }
+    .trust-dot { width:4px; height:4px; background:var(--text-muted); border-radius:50%; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:6px; z-index:2; opacity:.5;
+    }
+    .scroll-hint span { font-size:.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); }
+    .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom, var(--primary-light), transparent); animation:scrollLine 1.8s ease-in-out infinite; }
+    @keyframes scrollLine { 0%{opacity:0;transform:scaleY(0);transform-origin:top} 50%{opacity:1;transform:scaleY(1)} 100%{opacity:0;transform:scaleY(0);transform-origin:bottom} }
+
+    /* ═══════════════════════════
+       STATS / MARQUEE
+    ═══════════════════════════ */
+    .stats-section { padding:2rem 1.5rem 5rem; position:relative; z-index:1; }
+    .stats-inner {
+      max-width:1000px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem;
+    }
+    @media (min-width:600px) { .stats-inner { grid-template-columns:repeat(4,1fr); } }
+    .stat-card {
+      background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius);
+      padding:2rem 1.5rem; text-align:center;
+      transition:transform var(--t), box-shadow var(--t);
+    }
+    .stat-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.3); }
+    .stat-num {
+      font-family:var(--font-head); font-size:2.8rem; font-weight:900; letter-spacing:-2px;
+      background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height:1;
+    }
+    .stat-label { font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); margin-top:.5rem; }
+
+    /* Tech marquee */
+    .marquee-section { overflow:hidden; padding:.5rem 0 2rem; position:relative; z-index:1; }
+    .marquee-track {
+      display:flex; gap:2.5rem; width:max-content;
+      animation:marquee 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state:paused; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .marquee-item {
+      display:flex; align-items:center; gap:10px;
+      background:var(--glass); border:1px solid var(--glass-border); border-radius:50px;
+      padding:10px 22px; white-space:nowrap; font-size:.82rem; font-weight:600;
+      color:var(--text-secondary); transition:color .2s, border-color .2s;
+      flex-shrink:0;
+    }
+    .marquee-item:hover { color:#fff; border-color:rgba(37,99,235,.4); }
+    .marquee-item i { color:var(--primary-light); }
+
+    /* ═══════════════════════════
+       ABOUT
+    ═══════════════════════════ */
+    .about-grid {
+      display:grid; grid-template-columns:1fr; gap:3rem;
+      align-items:center;
+    }
+    @media (min-width:900px) { .about-grid { grid-template-columns:1fr 1fr; gap:5rem; } }
+
+    .about-visual {
+      position:relative; display:flex; align-items:center; justify-content:center;
+    }
+    .about-circle-bg {
+      width:340px; height:340px; border-radius:50%;
+      background:conic-gradient(from 0deg,rgba(37,99,235,.15),rgba(139,92,246,.12),rgba(6,182,212,.1),rgba(37,99,235,.15));
+      display:flex; align-items:center; justify-content:center;
+      animation:rotateSlow 30s linear infinite;
+      position:relative;
+    }
+    @keyframes rotateSlow { to{transform:rotate(360deg)} }
+    .about-circle-inner {
+      width:260px; height:260px; border-radius:50%;
+      background:var(--bg); display:flex; align-items:center; justify-content:center;
+      animation:rotateSlow 30s linear infinite reverse;
+    }
+    .about-logo { width:140px; height:140px; border-radius:50%; object-fit:cover; }
+
+    .about-floats { position:absolute; inset:0; pointer-events:none; }
+    .af-chip {
+      position:absolute; background:var(--glass-strong); border:1px solid var(--glass-border);
+      border-radius:var(--radius-sm); padding:10px 16px;
+      font-size:.78rem; font-weight:600; white-space:nowrap;
+      display:flex; align-items:center; gap:8px;
+      box-shadow:var(--shadow-sm); animation:chipFloat 6s ease-in-out infinite;
+    }
+    .af-chip.c1 { top:8%; right:-4%; animation-delay:0s; }
+    .af-chip.c2 { bottom:12%; left:-8%; animation-delay:-2s; }
+    .af-chip.c3 { top:50%; right:-12%; animation-delay:-4s; }
+    @keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    .about-value-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    @media (max-width:600px) { .about-value-cards { grid-template-columns:1fr; } }
+    .av-card { background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius); padding:1.4rem 1.2rem; text-align:center; transition:transform var(--t), border-color var(--t); }
+    .av-card:hover { transform:translateY(-4px); border-color:rgba(37,99,235,.35); }
+    .av-icon { font-size:1.8rem; margin-bottom:.7rem; }
+    .av-card h4 { font-family:var(--font-head); font-size:.95rem; font-weight:700; margin-bottom:.3rem; }
+    .av-card p  { font-size:.8rem; color:var(--text-secondary); line-height:1.6; }
+
+    /* ═══════════════════════════
+       SERVICES
+    ═══════════════════════════ */
+    .services-section { background:var(--bg-secondary); }
+    .services-grid {
+      display:grid; grid-template-columns:1fr; gap:1.5rem;
+    }
+    @media (min-width:600px) { .services-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:960px) { .services-grid { grid-template-columns:repeat(3,1fr); } }
+
+    .service-card {
+      padding:2rem; border-radius:var(--radius); background:var(--bg-card);
+      border:1px solid var(--glass-border);
+      transition:transform var(--t) var(--ease), box-shadow var(--t), border-color var(--t), background var(--t);
+      position:relative; overflow:hidden;
+    }
+    .service-card::before {
+      content:''; position:absolute; inset:0; opacity:0;
+      background:radial-gradient(ellipse at top left, rgba(37,99,235,.12), transparent 60%);
+      transition:opacity var(--t);
+    }
+    .service-card:hover { transform:translateY(-8px); box-shadow:0 24px 56px rgba(0,0,0,.35); border-color:rgba(37,99,235,.3); background:var(--bg-card-hover); }
+    .service-card:hover::before { opacity:1; }
+
+    .service-icon-wrap {
+      width:54px; height:54px; border-radius:var(--radius-sm);
+      background:rgba(37,99,235,.12); border:1px solid rgba(37,99,235,.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; margin-bottom:1.2rem;
+      transition:transform var(--t) var(--ease), box-shadow var(--t);
+    }
+    .service-card:hover .service-icon-wrap { transform:scale(1.1) rotate(-4deg); box-shadow:0 8px 24px rgba(37,99,235,.3); }
+
+    .s-num { position:absolute; top:1.4rem; right:1.6rem; font-family:var(--font-mono); font-size:.7rem; color:var(--text-muted); font-weight:600; }
+
+    .service-card h3 { font-family:var(--font-head); font-size:1.15rem; font-weight:700; margin-bottom:.6rem; }
+    .service-card p  { color:var(--text-secondary); font-size:.88rem; line-height:1.7; margin-bottom:1.2rem; }
+    .service-link {
+      display:inline-flex; align-items:center; gap:6px;
+      color:var(--primary-light); font-weight:600; font-size:.82rem;
+      transition:gap .2s, color .2s;
+    }
+    .service-link:hover { gap:12px; color:#fff; }
+
+    /* ═══════════════════════════
+       PORTFOLIO
+    ═══════════════════════════ */
+    .portfolio-filters {
+      display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:2.5rem;
+    }
+    .pf-btn {
+      padding:8px 20px; border-radius:50px; font-size:.8rem; font-weight:600;
+      border:1px solid var(--glass-border); background:var(--glass); color:var(--text-secondary);
+      cursor:pointer; transition:all .25s;
+    }
+    .pf-btn.active, .pf-btn:hover {
+      background:var(--grad-primary); color:#fff; border-color:transparent;
+      box-shadow:0 6px 20px rgba(37,99,235,.35);
+    }
+
+    .portfolio-masonry {
+      columns:1; column-gap:1.5rem;
+    }
+    @media (min-width:600px)  { .portfolio-masonry { columns:2; } }
+    @media (min-width:1024px) { .portfolio-masonry { columns:3; } }
+
+    .p-item {
+      break-inside:avoid; margin-bottom:1.5rem;
+      border-radius:var(--radius-lg); overflow:hidden; position:relative;
+      cursor:pointer; display:block;
+    }
+    .p-thumb {
+      width:100%; aspect-ratio:4/3; object-fit:cover;
+      transition:transform .5s var(--ease);
+      background:var(--glass); display:flex; align-items:center; justify-content:center;
+      font-size:3.5rem;
+    }
+    .p-thumb img { width:100%; height:100%; object-fit:cover; }
+    .p-item:hover .p-thumb { transform:scale(1.06); }
+
+    .p-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(5,8,22,.92) 0%, rgba(5,8,22,.5) 50%, transparent 100%);
+      display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;
+      opacity:0; transition:opacity .35s;
+    }
+    .p-item:hover .p-overlay { opacity:1; }
+    .p-category { font-size:.7rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--primary-light); font-family:var(--font-mono); margin-bottom:.4rem; }
+    .p-title { font-family:var(--font-head); font-weight:700; font-size:1.05rem; }
+    .p-link { margin-top:.7rem; display:inline-flex; align-items:center; gap:6px; font-size:.8rem; font-weight:600; color:var(--primary-light); }
+
+    /* Emoji placeholder items */
+    .p-emoji {
+      aspect-ratio:4/3; background:var(--bg-card); border:1px solid var(--glass-border);
+      border-radius:var(--radius-lg); display:flex; align-items:center; justify-content:center;
+      font-size:3.5rem;
+    }
+
+    /* ═══════════════════════════
+       PROCESS
+    ═══════════════════════════ */
+    .process-section { background:var(--bg-secondary); }
+    .process-row {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;
+    }
+    @media (min-width:600px)  { .process-row { grid-template-columns:repeat(4,1fr); } }
+    @media (min-width:1024px) { .process-row { grid-template-columns:repeat(7,1fr); } }
+
+    .proc-card {
+      background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius);
+      padding:1.6rem 1rem; text-align:center;
+      transition:transform var(--t) var(--ease), border-color var(--t), box-shadow var(--t);
+    }
+    .proc-card:hover { transform:translateY(-6px); border-color:rgba(37,99,235,.4); box-shadow:0 16px 40px rgba(37,99,235,.15); }
+    .proc-num { font-family:var(--font-head); font-size:2rem; font-weight:900; line-height:1; background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.5rem; }
+    .proc-card h4 { font-family:var(--font-head); font-size:.9rem; font-weight:700; margin-bottom:.3rem; }
+    .proc-card p  { color:var(--text-secondary); font-size:.75rem; line-height:1.5; }
+
+    /* ═══════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════ */
+    .testi-carousel { position:relative; overflow:hidden; }
+    .testi-track {
+      display:flex; gap:1.5rem;
+      transition:transform .55s var(--ease);
+    }
+    .testi-card {
+      flex:0 0 calc(100% - 0px); max-width:480px;
+      background:var(--bg-card); border:1px solid var(--glass-border);
+      border-radius:var(--radius-lg); padding:2.2rem;
+    }
+    @media (min-width:768px) { .testi-card { flex:0 0 calc(50% - .75rem); } }
+    @media (min-width:1200px) { .testi-card { flex:0 0 calc(33.33% - 1rem); } }
+
+    .testi-stars { color:#F0B90B; letter-spacing:2px; font-size:1rem; margin-bottom:1rem; }
+    .testi-quote { color:var(--text-secondary); font-style:italic; line-height:1.8; font-size:.95rem; margin-bottom:1.5rem; }
+    .testi-divider { width:32px; height:2px; background:var(--grad-primary); border-radius:99px; margin-bottom:1rem; }
+    .testi-author { font-weight:700; font-family:var(--font-head); }
+    .testi-role   { font-size:.78rem; color:var(--text-muted); margin-top:2px; }
+
+    .testi-controls { display:flex; gap:.75rem; margin-top:2rem; }
+    .testi-btn {
+      width:44px; height:44px; border-radius:50%; border:1.5px solid var(--glass-border);
+      background:var(--glass); color:#fff; font-size:1rem;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:background var(--t), border-color var(--t), transform var(--t);
+    }
+    .testi-btn:hover { background:var(--primary); border-color:var(--primary); transform:scale(1.08); }
+
+    /* ═══════════════════════════
+       PRICING
+    ═══════════════════════════ */
+    .pricing-section { background:var(--bg-secondary); }
+    .pricing-grid {
+      display:grid; grid-template-columns:1fr; gap:2rem;
+    }
+    @media (min-width:768px) { .pricing-grid { grid-template-columns:repeat(3,1fr); align-items:stretch; } }
+
+    .pricing-card {
+      background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      padding:2.5rem 2rem; position:relative; overflow:hidden;
+      transition:transform var(--t), box-shadow var(--t), border-color var(--t);
+      display:flex; flex-direction:column;
+    }
+    .pricing-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      border-radius:var(--radius-lg) var(--radius-lg) 0 0; opacity:0; transition:opacity var(--t);
+    }
+    .pricing-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-card); border-color:rgba(255,255,255,.15); }
+    .pricing-card:hover::before { opacity:1; }
+
+    .pc-starter::before  { background:var(--grad-primary); }
+    .pc-pro::before      { background:var(--grad-accent); }
+    .pc-enterprise::before { background:var(--grad-warm); }
+
+    .pricing-card.featured {
+      border-color:rgba(37,99,235,.45);
+      box-shadow:0 0 0 1px rgba(37,99,235,.25), 0 24px 60px rgba(37,99,235,.2);
+    }
+    @media (min-width:768px) { .pricing-card.featured { transform:scale(1.04); } .pricing-card.featured:hover { transform:scale(1.04) translateY(-8px); } }
+
+    .pricing-badge {
+      position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+      background:var(--grad-accent); color:#fff; padding:6px 22px;
+      border-radius:0 0 var(--radius) var(--radius);
+      font-size:.72rem; font-weight:800; letter-spacing:1.5px; white-space:nowrap;
+    }
+
+    .pc-tier { font-size:.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--primary-light); font-family:var(--font-mono); margin-bottom:.5rem; }
+    .pc-name { font-family:var(--font-head); font-size:1.4rem; font-weight:800; margin-bottom:1rem; }
+    .pc-price { font-family:var(--font-head); font-size:3rem; font-weight:900; letter-spacing:-2px; line-height:1; margin-bottom:.3rem; }
+    .pc-price sup { font-size:1.5rem; vertical-align:top; margin-top:.5rem; display:inline-block; font-weight:600; }
+    .pc-period { font-size:.82rem; color:var(--text-secondary); margin-bottom:1.8rem; }
+    .pc-divider { width:100%; height:1px; background:var(--glass-border); margin-bottom:1.8rem; }
+    .pc-features { flex:1; }
+    .pc-features li {
+      display:flex; align-items:center; gap:10px; padding:.6rem 0;
+      font-size:.88rem; color:var(--text-secondary); border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .pc-features li:last-child { border-bottom:none; }
+    .pc-features li i { color:var(--success); flex-shrink:0; font-size:.8rem; }
+    .pc-features li.no i { color:var(--text-muted); }
+    .pc-features li.no span { opacity:.5; }
+    .pc-btn { margin-top:2rem; width:100%; }
+
+    /* ═══════════════════════════
+       BLOG
+    ═══════════════════════════ */
+    .blog-grid {
+      display:grid; grid-template-columns:1fr; gap:2rem;
+    }
+    @media (min-width:640px)  { .blog-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:1024px) { .blog-grid { grid-template-columns:repeat(3,1fr); } }
+
+    .blog-card { overflow:hidden; background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius-lg); transition:transform var(--t), box-shadow var(--t), border-color var(--t); }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-card); border-color:rgba(255,255,255,.14); }
+    .blog-img {
+      height:200px; display:flex; align-items:center; justify-content:center; font-size:4rem;
+      background:var(--glass); position:relative; overflow:hidden;
+    }
+    .blog-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, transparent 50%, rgba(5,8,22,.6) 100%); }
+    .blog-body { padding:1.8rem; }
+    .blog-cat { font-size:.68rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--primary-light); font-family:var(--font-mono); }
+    .blog-date { font-size:.72rem; color:var(--text-muted); margin-left:auto; }
+    .blog-meta { display:flex; align-items:center; gap:.7rem; margin-bottom:.8rem; }
+    .blog-body h4 { font-family:var(--font-head); font-weight:700; font-size:1.05rem; line-height:1.4; margin-bottom:.6rem; }
+    .blog-body p  { color:var(--text-secondary); font-size:.85rem; line-height:1.7; }
+    .blog-read { margin-top:1.2rem; display:inline-flex; align-items:center; gap:6px; font-size:.82rem; font-weight:600; color:var(--primary-light); transition:gap .2s; }
+    .blog-read:hover { gap:12px; }
+
+    /* ═══════════════════════════
+       FAQ
+    ═══════════════════════════ */
+    .faq-section { background:var(--bg-secondary); }
+    .faq-wrap { max-width:780px; margin:0 auto; }
+    .faq-item { border-bottom:1px solid var(--glass-border); }
+    .faq-q {
+      width:100%; background:none; border:none; color:#fff;
+      font-family:var(--font-head); font-size:1rem; font-weight:600;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      padding:1.3rem 0; cursor:pointer; text-align:left; transition:color .2s;
+    }
+    .faq-q:hover { color:var(--primary-light); }
+    .faq-icon { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--glass-border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.75rem; color:var(--primary-light); transition:transform .3s, background .3s, border-color .3s; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); background:rgba(37,99,235,.15); border-color:rgba(37,99,235,.4); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .4s var(--ease), padding .4s; color:var(--text-secondary); font-size:.92rem; line-height:1.8; }
+    .faq-item.open .faq-a { max-height:300px; padding-bottom:1.3rem; }
+
+    /* ═══════════════════════════
+       CONTACT
+    ═══════════════════════════ */
+    .contact-grid {
+      display:grid; grid-template-columns:1fr; gap:3rem; align-items:start;
+    }
+    @media (min-width:768px) { .contact-grid { grid-template-columns:1.1fr 1fr; } }
+
+    .cf-group { margin-bottom:1.2rem; position:relative; }
+    .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.2rem; }
+    @media (max-width:480px) { .cf-row { grid-template-columns:1fr; } }
+    .cf-label { display:block; font-size:.78rem; font-weight:600; color:var(--text-secondary); letter-spacing:.5px; margin-bottom:.5rem; }
+    .cf-input {
+      width:100%; padding:13px 16px;
+      background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius-sm);
+      color:#fff; font-family:var(--font); font-size:.9rem; outline:none;
+      transition:border-color .25s, box-shadow .25s, background .25s;
+      appearance:none;
+    }
+    .cf-input::placeholder { color:var(--text-muted); }
+    .cf-input:focus { border-color:var(--primary); background:rgba(37,99,235,.05); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+    .cf-input.error { border-color:#EF4444; }
+    textarea.cf-input { resize:vertical; min-height:130px; }
+    select.cf-input { cursor:pointer; }
+    select.cf-input option { background:var(--bg-secondary); }
+
+    .contact-cards { display:flex; flex-direction:column; gap:1rem; }
+    .cc {
+      display:flex; align-items:center; gap:1rem;
+      background:var(--bg-card); border:1px solid var(--glass-border); border-radius:var(--radius);
+      padding:1.2rem 1.4rem; transition:border-color var(--t), transform var(--t);
+    }
+    .cc:hover { border-color:rgba(37,99,235,.4); transform:translateX(4px); }
+    .cc-icon { width:42px; height:42px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+    .cc-label { font-size:.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px; }
+    .cc-value { font-weight:600; font-size:.92rem; }
+
+    /* Social links in contact */
+    .social-row { display:flex; gap:.75rem; margin-top:1.5rem; }
+    .soc-btn {
+      width:40px; height:40px; border-radius:50%; border:1px solid var(--glass-border);
+      background:var(--glass); display:flex; align-items:center; justify-content:center;
+      color:var(--text-secondary); font-size:.9rem;
+      transition:background var(--t), color var(--t), transform var(--t), border-color var(--t);
+    }
+    .soc-btn:hover { background:var(--primary); color:#fff; border-color:var(--primary); transform:translateY(-3px); }
+
+    /* ═══════════════════════════
+       NEWSLETTER
+    ═══════════════════════════ */
+    .newsletter-section {
+      background:var(--bg-secondary);
+      position:relative; overflow:hidden; text-align:center; padding:5rem 1.5rem;
+    }
+    .newsletter-section::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 80% at 50% 50%, rgba(37,99,235,.08), transparent);
+      pointer-events:none;
+    }
+    .nl-box { display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; max-width:520px; margin:0 auto; }
+    .nl-input {
+      flex:1; min-width:200px; padding:14px 22px; background:var(--glass);
+      border:1px solid var(--glass-border); border-radius:50px; color:#fff;
+      font-family:var(--font); font-size:.9rem; outline:none; transition:border-color .2s;
+    }
+    .nl-input:focus { border-color:var(--primary); }
+    .nl-input::placeholder { color:var(--text-muted); }
+
+    /* ═══════════════════════════
+       FOOTER
+    ═══════════════════════════ */
+    footer {
+      background:var(--bg-secondary); border-top:1px solid var(--glass-border);
+      padding:5rem 1.5rem 2rem;
+    }
+    @media (min-width:768px) { footer { padding:5rem 2.5rem 2rem; } }
+    .footer-grid {
+      max-width:1260px; margin:0 auto;
+      display:grid; grid-template-columns:1fr; gap:2.5rem;
+    }
+    @media (min-width:640px)  { .footer-grid { grid-template-columns:1fr 1fr; } }
+    @media (min-width:1024px) { .footer-grid { grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; } }
+
+    .footer-brand .fl { font-family:var(--font-head); font-size:1.6rem; font-weight:900; background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.8rem; display:block; }
+    .footer-brand p { color:var(--text-secondary); font-size:.84rem; line-height:1.75; max-width:280px; }
+    .footer-col h5 { font-family:var(--font-head); font-size:.88rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:1.2rem; color:#fff; }
+    .footer-col a { color:var(--text-secondary); font-size:.85rem; display:block; margin-bottom:.65rem; transition:color .2s, transform .2s; padding-left:0; }
+    .footer-col a:hover { color:#fff; transform:translateX(4px); }
+
+    .footer-bottom {
+      max-width:1260px; margin:3rem auto 0;
+      padding-top:1.5rem; border-top:1px solid var(--glass-border);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+    }
+    .footer-bottom p { color:var(--text-muted); font-size:.78rem; }
+
+    /* ═══════════════════════════
+       FLOATING BUTTONS
+    ═══════════════════════════ */
+    .fab-wa {
+      position:fixed; bottom:28px; left:28px; z-index:9000;
+      width:54px; height:54px; border-radius:50%; background:#25D366; color:#fff;
+      display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+      box-shadow:0 8px 32px rgba(37,211,102,.45);
+      transition:transform var(--t), box-shadow var(--t);
+      animation:waWiggle 4s ease-in-out infinite 3s;
+    }
+    .fab-wa:hover { transform:scale(1.1); box-shadow:0 14px 40px rgba(37,211,102,.6); animation:none; }
+    @keyframes waWiggle { 0%,100%{transform:rotate(0)} 10%{transform:rotate(-10deg)} 20%{transform:rotate(10deg)} 30%{transform:rotate(-6deg)} 40%{transform:rotate(6deg)} 50%{transform:rotate(0)} }
+
+    .fab-top {
+      position:fixed; bottom:28px; right:28px; z-index:9000;
+      width:48px; height:48px; border-radius:50%; background:var(--grad-primary); color:#fff;
+      display:flex; align-items:center; justify-content:center; font-size:1rem;
+      box-shadow:0 6px 24px rgba(37,99,235,.4); border:none;
+      opacity:0; transform:translateY(12px) scale(.9); visibility:hidden;
+      transition:all var(--t);
+    }
+    .fab-top.show { opacity:1; transform:translateY(0) scale(1); visibility:visible; }
+    .fab-top:hover { transform:translateY(-3px) scale(1.05); }
+
+    /* ═══════════════════════════
+       TOAST
+    ═══════════════════════════ */
+    .toast-wrap { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); z-index:99990; display:flex; flex-direction:column; gap:.5rem; align-items:center; pointer-events:none; }
+    .toast {
+      background:rgba(10,15,31,.95); border:1px solid var(--glass-border);
+      backdrop-filter:blur(20px); border-radius:var(--radius-sm);
+      padding:12px 24px; font-size:.88rem; font-weight:500;
+      display:flex; align-items:center; gap:10px;
+      animation:toastIn .35s var(--ease-spring) both;
+      box-shadow:0 16px 40px rgba(0,0,0,.4);
+    }
+    .toast.success { border-color:rgba(16,185,129,.4); }
+    .toast.success i { color:var(--success); }
+    .toast.error   { border-color:rgba(239,68,68,.4); }
+    .toast.error   i { color:#EF4444; }
+    .toast.out { animation:toastOut .3s ease both; }
+    @keyframes toastIn  { from{opacity:0;transform:translateY(16px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes toastOut { to{opacity:0;transform:translateY(-10px) scale(.95)} }
+
+    /* ═══════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════ */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .65s var(--ease), transform .65s var(--ease); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ═══════════════════════════
+       RESPONSIVE
+    ═══════════════════════════ */
+    @media (max-width:480px) {
+      .hero-title { letter-spacing:-1.5px; }
+      .trust-dot  { display:none; }
+      .trust-strip span:nth-child(n+4) { display:none; }
+      .cf-row     { grid-template-columns:1fr; }
+      section     { padding:4rem 1.2rem; }
+    }
+  </style>
 </head>
-<body class="loading">
+<body class="no-scroll">
 
-    <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-content">       <!-- ✅ only one loader-content -->
-        <img src="logo.png" alt="Zentorix" class="loader-logo-img">
-        <div class="loader-bar"><div class="loader-bar-inner"></div></div>
-    </div>
+<!-- ─── LOADER ─── -->
+<div class="loader" id="loader">
+  <img src="logo.png" alt="Zentorix" class="loader-logo" onerror="this.style.display='none'" />
+  <div class="loader-word">Zentorix</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
-    <!-- Custom Cursor (only non‑touch) -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+<!-- ─── CURSOR ─── -->
+<div class="c-dot"  id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
 
-    <!-- Particles Canvas (hidden on touch for performance) -->
-    <canvas id="particlesCanvas"></canvas>
+<!-- ─── MESH + PARTICLES ─── -->
+<div class="mesh-bg"></div>
+<canvas id="particlesCanvas"></canvas>
 
-    <!-- ───── NAVIGATION ───── -->
-    <nav class="navbar" id="navbar">
-       <a href="#home" class="nav-logo">
-    <img src="logo.png" alt="Zentorix" class="nav-logo-img">
-</a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#contact" class="nav-cta">Get Started</a></li>
+<!-- ─── TOAST ─── -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ═══════════════════
+  NAVBAR
+═══════════════════ -->
+<nav class="navbar" id="navbar">
+  <a href="#home" class="nav-logo">
+    <img src="logo.png" alt="Z" class="nav-logo-img" onerror="this.style.display='none'" />
+    Zentorix
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home"        class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started →</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Sidebar backdrop -->
+<div class="sidebar-backdrop" id="backdrop"></div>
+
+<!-- Sidebar (mobile) -->
+<div class="sidebar" id="sidebar">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#process">Process</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#blog">Blog</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="sidebar-cta">Get Started →</a>
+</div>
+
+<!-- ═══════════════════
+  HERO
+═══════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-orb o3"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      &nbsp;ENGINEERING DIGITAL EXCELLENCE
+    </div>
+
+    <h1 class="hero-title">
+      We Build Digital<br />
+      <span class="typed-wrap">
+        <span class="typed-text" id="typedText"></span><span class="cursor-blink"></span>
+      </span>
+    </h1>
+
+    <p class="hero-sub">
+      Zentorix creates modern websites, software solutions, branding, and digital experiences
+      that help businesses stand out and grow — globally.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#contact"   class="btn btn-primary">Start Your Project <i class="fas fa-arrow-right"></i></a>
+      <a href="#portfolio" class="btn btn-outline">Explore Portfolio <i class="fas fa-eye"></i></a>
+    </div>
+
+    <div class="trust-strip">
+      <span><i class="fas fa-star"></i> 5-Star Rated</span>
+      <span class="trust-dot"></span>
+      <span><i class="fas fa-shield-alt"></i> Secure & Reliable</span>
+      <span class="trust-dot"></span>
+      <span><i class="fas fa-bolt"></i> Fast Delivery</span>
+      <span class="trust-dot"></span>
+      <span><i class="fas fa-headset"></i> 24/7 Support</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  STATS
+═══════════════════ -->
+<div class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-card reveal">
+      <div class="stat-num counter" data-target="250">0</div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num counter" data-target="180">0</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num counter" data-target="7">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num counter" data-target="50">0</div>
+      <div class="stat-label">Team Members</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════
+  TECH MARQUEE
+═══════════════════ -->
+<div class="marquee-section" style="position:relative;z-index:1;">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- duplicated for seamless loop -->
+  </div>
+</div>
+
+<!-- ═══════════════════
+  ABOUT
+═══════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Visual -->
+      <div class="about-visual reveal">
+        <div class="about-circle-bg">
+          <div class="about-circle-inner">
+            <img src="logo.png" alt="Zentorix" class="about-logo" onerror="this.style.fontSize='4rem'; this.alt='🚀'; this.style.display='flex'" />
+          </div>
+        </div>
+        <div class="about-floats">
+          <div class="af-chip c1"><i class="fas fa-code" style="color:var(--primary-light)"></i> Clean Code</div>
+          <div class="af-chip c2"><i class="fas fa-rocket" style="color:var(--accent-light)"></i> Fast Delivery</div>
+          <div class="af-chip c3"><i class="fas fa-star" style="color:#F0B90B"></i> 5-Star Reviews</div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="reveal">
+        <span class="tag">About Us</span>
+        <h2 class="section-title" style="margin-bottom:.8rem;">Engineering the Future,<br /><span class="grad">One Solution at a Time</span></h2>
+        <div class="rule"></div>
+        <p class="section-sub" style="margin-bottom:1.5rem;">
+          Zentorix is a full-service digital agency specializing in web development, software engineering, branding, and digital transformation. We don't just build products — we craft experiences that drive growth.
+        </p>
+        <div class="hero-btns" style="justify-content:flex-start; margin-bottom:2rem;">
+          <a href="#services" class="btn btn-primary btn-sm">Our Services <i class="fas fa-arrow-right"></i></a>
+          <a href="#portfolio" class="btn btn-ghost btn-sm">View Portfolio</a>
+        </div>
+        <div class="about-value-cards">
+          <div class="av-card">
+            <div class="av-icon">🚀</div>
+            <h4>Mission</h4>
+            <p>Empower businesses with cutting-edge digital solutions.</p>
+          </div>
+          <div class="av-card">
+            <div class="av-icon">🌍</div>
+            <h4>Vision</h4>
+            <p>Global standard for digital excellence.</p>
+          </div>
+          <div class="av-card">
+            <div class="av-icon">💎</div>
+            <h4>Values</h4>
+            <p>Innovation, integrity &amp; quality above all.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  SERVICES
+═══════════════════ -->
+<section id="services" class="services-section">
+  <div class="container">
+    <span class="tag">Services</span>
+    <h2 class="section-title">What We <span class="grad">Build</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">End-to-end digital solutions engineered for performance, scalability, and lasting impact.</p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="s-num">01</span>
+        <div class="service-icon-wrap">🌐</div>
+        <h3>Website Development</h3>
+        <p>Custom business, restaurant, clinic, real estate, school, portfolio &amp; e-commerce websites — pixel perfect and lightning fast.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal">
+        <span class="s-num">02</span>
+        <div class="service-icon-wrap">💻</div>
+        <h3>Software Development</h3>
+        <p>Desktop apps, enterprise software, POS, inventory, CRM &amp; ERP solutions built for real-world operations.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal">
+        <span class="s-num">03</span>
+        <div class="service-icon-wrap">📱</div>
+        <h3>Mobile Apps</h3>
+        <p>Native Android, iOS &amp; cross-platform mobile applications engineered with modern frameworks &amp; best practices.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal">
+        <span class="s-num">04</span>
+        <div class="service-icon-wrap">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Brand identity, logo design, social media graphics &amp; intuitive user experiences that convert visitors into customers.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal">
+        <span class="s-num">05</span>
+        <div class="service-icon-wrap">📈</div>
+        <h3>SEO &amp; Marketing</h3>
+        <p>Search engine optimization, Google Business Profile setup &amp; data-driven digital marketing strategies that actually work.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal">
+        <span class="s-num">06</span>
+        <div class="service-icon-wrap">🛡️</div>
+        <h3>Hosting &amp; Support</h3>
+        <p>Reliable managed hosting, domain management, technical support &amp; ongoing maintenance — so you never worry.</p>
+        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  PORTFOLIO
+═══════════════════ -->
+<section id="portfolio">
+  <div class="container">
+    <span class="tag">Portfolio</span>
+    <h2 class="section-title">Our <span class="grad">Work</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">A selection of projects we've crafted with passion and precision.</p>
+
+    <div class="portfolio-filters">
+      <button class="pf-btn active" data-filter="all">All</button>
+      <button class="pf-btn" data-filter="web">Websites</button>
+      <button class="pf-btn" data-filter="software">Software</button>
+      <button class="pf-btn" data-filter="mobile">Mobile</button>
+      <button class="pf-btn" data-filter="design">Design</button>
+    </div>
+
+    <div class="portfolio-masonry">
+
+      <a href="https://dera-ali-akbar.netlify.app/" target="_blank" rel="noopener" class="p-item reveal" data-cat="web">
+        <div class="p-thumb">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHTPPGo9g_DgIYiC7pT9c0y_6KGk0D1tykW6zRwytfuw&s=10" alt="Restaurant Website" />
+        </div>
+        <div class="p-overlay">
+          <div class="p-category">Website</div>
+          <div class="p-title">Restaurant Website</div>
+          <div class="p-link">View Live <i class="fas fa-external-link-alt"></i></div>
+        </div>
+      </a>
+
+      <a href="https://cafe-and-co.netlify.app" target="_blank" rel="noopener" class="p-item reveal" data-cat="web">
+        <div class="p-thumb">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/b9/71/11/caption.jpg" alt="Café Website" />
+        </div>
+        <div class="p-overlay">
+          <div class="p-category">Website</div>
+          <div class="p-title">Café &amp; Co</div>
+          <div class="p-link">View Live <i class="fas fa-external-link-alt"></i></div>
+        </div>
+      </a>
+
+      <div class="p-item reveal" data-cat="software">
+        <div class="p-emoji">🏥</div>
+        <div class="p-overlay">
+          <div class="p-category">Software</div>
+          <div class="p-title">Healthcare Management System</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="web">
+        <div class="p-emoji">🏫</div>
+        <div class="p-overlay">
+          <div class="p-category">Website</div>
+          <div class="p-title">Education Portal</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="mobile">
+        <div class="p-emoji">🏢</div>
+        <div class="p-overlay">
+          <div class="p-category">Mobile App</div>
+          <div class="p-title">Real Estate App</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="software">
+        <div class="p-emoji">🏋️</div>
+        <div class="p-overlay">
+          <div class="p-category">Software</div>
+          <div class="p-title">Gym Management System</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="web">
+        <div class="p-emoji">⚖️</div>
+        <div class="p-overlay">
+          <div class="p-category">Website</div>
+          <div class="p-title">Law Firm Website</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="design">
+        <div class="p-emoji">💼</div>
+        <div class="p-overlay">
+          <div class="p-category">Design</div>
+          <div class="p-title">Corporate Brand Identity</div>
+        </div>
+      </div>
+
+      <div class="p-item reveal" data-cat="software">
+        <div class="p-emoji">🔬</div>
+        <div class="p-overlay">
+          <div class="p-category">Software</div>
+          <div class="p-title">Technology Startup Dashboard</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  PROCESS
+═══════════════════ -->
+<section id="process" class="process-section">
+  <div class="container">
+    <span class="tag">Process</span>
+    <h2 class="section-title">How We <span class="grad">Work</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">A refined, transparent workflow built on collaboration and clear communication.</p>
+
+    <div class="process-row">
+      <div class="proc-card reveal"><div class="proc-num">01</div><h4>Discover</h4><p>Understanding your goals &amp; audience</p></div>
+      <div class="proc-card reveal"><div class="proc-num">02</div><h4>Research</h4><p>Market &amp; competitor analysis</p></div>
+      <div class="proc-card reveal"><div class="proc-num">03</div><h4>Design</h4><p>Beautiful, intuitive interfaces</p></div>
+      <div class="proc-card reveal"><div class="proc-num">04</div><h4>Develop</h4><p>Robust, scalable solutions</p></div>
+      <div class="proc-card reveal"><div class="proc-num">05</div><h4>Test</h4><p>Rigorous quality assurance</p></div>
+      <div class="proc-card reveal"><div class="proc-num">06</div><h4>Launch</h4><p>Smooth, confident deployment</p></div>
+      <div class="proc-card reveal"><div class="proc-num">07</div><h4>Support</h4><p>Ongoing care &amp; maintenance</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  TESTIMONIALS
+═══════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <span class="tag">Testimonials</span>
+    <h2 class="section-title">Client <span class="grad">Success Stories</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Don't take our word for it — hear it from the people we've helped.</p>
+
+    <div class="testi-carousel">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Zentorix transformed our online presence completely. Our website now converts 3× more visitors into customers. Absolutely outstanding work."</p>
+          <div class="testi-divider"></div>
+          <div class="testi-author">Ahmed Khan</div>
+          <div class="testi-role">CEO, TechVentures</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The custom ERP system they built streamlined our entire operations. What used to take hours now takes minutes. Best investment we've made."</p>
+          <div class="testi-divider"></div>
+          <div class="testi-author">Sarah Mahmood</div>
+          <div class="testi-role">Operations Director, MedCare</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Professional, innovative, and incredibly responsive. They delivered a world-class mobile app that our users absolutely love."</p>
+          <div class="testi-divider"></div>
+          <div class="testi-author">Zain Ali</div>
+          <div class="testi-role">Founder, EduPlatform</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Our restaurant's online ordering system increased revenue by 40% in just two months. The team was a pleasure to work with from start to finish."</p>
+          <div class="testi-divider"></div>
+          <div class="testi-author">Fatima Raza</div>
+          <div class="testi-role">Owner, Bistro Luxe</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"From branding to launch, Zentorix guided us every step of the way. Our brand identity is now something we're genuinely proud of."</p>
+          <div class="testi-divider"></div>
+          <div class="testi-author">Omar Siddiqui</div>
+          <div class="testi-role">Creative Director, Pixel Studios</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" id="testiPrev" aria-label="Previous"><i class="fas fa-arrow-left"></i></button>
+      <button class="testi-btn" id="testiNext" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  PRICING
+═══════════════════ -->
+<section id="pricing" class="pricing-section">
+  <div class="container">
+    <span class="tag">Pricing</span>
+    <h2 class="section-title">Transparent <span class="grad">Pricing</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Clear, honest pricing with no hidden fees. Choose the plan that fits your goals.</p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card pc-starter reveal">
+        <div class="pc-tier">Starter</div>
+        <div class="pc-name">Starter Plan</div>
+        <div class="pc-price"><sup>$</sup>60</div>
+        <div class="pc-period">per project · one-time</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li><i class="fas fa-check"></i><span>5-Page Website</span></li>
+          <li><i class="fas fa-check"></i><span>Responsive Design</span></li>
+          <li><i class="fas fa-check"></i><span>Basic SEO Setup</span></li>
+          <li><i class="fas fa-check"></i><span>Contact Form</span></li>
+          <li><i class="fas fa-check"></i><span>Smooth Animations</span></li>
+          <li><i class="fas fa-check"></i><span>1 Month Support</span></li>
+          <li class="no"><i class="fas fa-times"></i><span>CMS Integration</span></li>
+          <li class="no"><i class="fas fa-times"></i><span>E-Commerce</span></li>
         </ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
+        <a href="#contact" class="btn btn-outline pc-btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card pc-pro featured reveal">
+        <div class="pricing-badge">⚡ Most Popular</div>
+        <div class="pc-tier">Professional</div>
+        <div class="pc-name">Pro Plan</div>
+        <div class="pc-price"><sup>$</sup>200</div>
+        <div class="pc-period">per project · one-time</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li><i class="fas fa-check"></i><span>Up to 15 Pages</span></li>
+          <li><i class="fas fa-check"></i><span>Custom Design</span></li>
+          <li><i class="fas fa-check"></i><span>Advanced SEO</span></li>
+          <li><i class="fas fa-check"></i><span>CMS Integration</span></li>
+          <li><i class="fas fa-check"></i><span>E-Commerce Ready</span></li>
+          <li><i class="fas fa-check"></i><span>Performance Optimized</span></li>
+          <li><i class="fas fa-check"></i><span>6 Months Support</span></li>
+          <li><i class="fas fa-check"></i><span>Analytics Dashboard</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary pc-btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card pc-enterprise reveal">
+        <div class="pc-tier">Enterprise</div>
+        <div class="pc-name">Enterprise Plan</div>
+        <div class="pc-price"><sup>$</sup>400</div>
+        <div class="pc-period">per project · one-time</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li><i class="fas fa-check"></i><span>Unlimited Pages</span></li>
+          <li><i class="fas fa-check"></i><span>Custom Web Application</span></li>
+          <li><i class="fas fa-check"></i><span>Full SEO Suite</span></li>
+          <li><i class="fas fa-check"></i><span>API Integrations</span></li>
+          <li><i class="fas fa-check"></i><span>Advanced Security</span></li>
+          <li><i class="fas fa-check"></i><span>Multi-language Support</span></li>
+          <li><i class="fas fa-check"></i><span>12 Months Support</span></li>
+          <li><i class="fas fa-check"></i><span>Priority Delivery</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-accent pc-btn">Get Started</a>
+      </div>
+
+    </div>
+
+    <p style="text-align:center; color:var(--text-muted); font-size:.82rem; margin-top:2rem;">
+      <i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:6px;"></i>
+      All prices are starting rates. Complex projects are quoted individually. <a href="#contact" style="color:var(--primary-light);">Contact us</a> for a custom quote.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  BLOG
+═══════════════════ -->
+<section id="blog">
+  <div class="container">
+    <span class="tag">Blog</span>
+    <h2 class="section-title">Insights &amp; <span class="grad">Ideas</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Thoughts on technology, design, and building great digital products.</p>
+
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-img">🤖</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat">Artificial Intelligence</span>
+            <span class="blog-date">Jan 2024</span>
+          </div>
+          <h4>How AI Is Transforming Business Software in 2024</h4>
+          <p>Explore the latest AI trends reshaping enterprise solutions and what it means for your business.</p>
+          <a href="#" class="blog-read">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img">🎨</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat">Web Design</span>
+            <span class="blog-date">Feb 2024</span>
+          </div>
+          <h4>Minimalist Design: Why Less Converts More</h4>
+          <p>Clean interfaces that convert better, load faster, and keep users coming back for more.</p>
+          <a href="#" class="blog-read">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img">📈</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat">SEO & Marketing</span>
+            <span class="blog-date">Mar 2024</span>
+          </div>
+          <h4>SEO Strategies That Actually Work in 2024</h4>
+          <p>Proven, up-to-date techniques to rank higher and attract highly qualified traffic to your site.</p>
+          <a href="#" class="blog-read">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  FAQ
+═══════════════════ -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <span class="tag">FAQ</span>
+    <h2 class="section-title">Frequently Asked <span class="grad">Questions</span></h2>
+    <div class="rule"></div>
+    <div class="faq-wrap">
+      <div class="faq-item open">
+        <button class="faq-q">What services does Zentorix offer? <span class="faq-icon"><i class="fas fa-plus"></i></span></button>
+        <div class="faq-a">We offer website development, software engineering, mobile apps, UI/UX design, SEO, branding, hosting, and ongoing technical support — everything your digital presence needs under one roof.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long does a typical project take? <span class="faq-icon"><i class="fas fa-plus"></i></span></button>
+        <div class="faq-a">Timelines vary by scope. A standard website takes 2–4 weeks, while complex software solutions may take 8–16 weeks. We always provide a clear timeline before starting.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you offer post-launch support? <span class="faq-icon"><i class="fas fa-plus"></i></span></button>
+        <div class="faq-a">Absolutely. All our packages include a support period, and we offer extended maintenance plans so your product stays updated, secure, and performing at its best.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you work with our existing systems? <span class="faq-icon"><i class="fas fa-plus"></i></span></button>
+        <div class="faq-a">Yes — we specialize in integrations with existing CRM, ERP, payment gateways, or third-party APIs. We assess your stack first and plan the integration carefully.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What industries do you serve? <span class="faq-icon"><i class="fas fa-plus"></i></span></button>
+        <div class="faq-a">We've worked with clients in healthcare, education, hospitality, real estate, e-commerce, law, fitness, and technology. Our team adapts quickly to any industry's unique requirements.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════
+  CONTACT
+═══════════════════ -->
+<section id="contact">
+  <div class="container">
+    <span class="tag">Contact</span>
+    <h2 class="section-title">Let's Build Something <span class="grad">Great</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Ready to start? Fill in the form and we'll get back to you within 24 hours.</p>
+
+    <div class="contact-grid">
+      <!-- Form -->
+      <form id="contactForm">
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="cf-name">Full Name *</label>
+            <input class="cf-input" type="text" id="cf-name" name="name" placeholder="John Smith" required />
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="cf-email">Email Address *</label>
+            <input class="cf-input" type="email" id="cf-email" name="email" placeholder="john@company.com" required />
+          </div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="cf-phone">Phone Number</label>
+            <input class="cf-input" type="tel" id="cf-phone" name="phone" placeholder="+92 3XX XXXXXXX" />
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="cf-budget">Budget Range</label>
+            <select class="cf-input" id="cf-budget" name="budget">
+              <option value="">Select budget</option>
+              <option>Under $60</option>
+              <option>$60 – $200</option>
+              <option>$200 – $400</option>
+              <option>$400+</option>
+              <option>Custom / Discuss</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-service">Service Required</label>
+          <select class="cf-input" id="cf-service" name="service">
+            <option value="">Select a service</option>
+            <option value="website">Website Development</option>
+            <option value="software">Software Development</option>
+            <option value="mobile">Mobile App</option>
+            <option value="design">UI/UX Design</option>
+            <option value="seo">SEO &amp; Marketing</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-message">Project Details *</label>
+          <textarea class="cf-input" id="cf-message" name="message" placeholder="Tell us about your project, goals, and any specific requirements..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:.5rem;" id="submitBtn">
+          Send Message <i class="fas fa-paper-plane"></i>
         </button>
-    </nav>
+      </form>
 
-    <!-- Sidebar backdrop -->
-    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+      <!-- Contact info -->
+      <div>
+        <div class="contact-cards">
+          <div class="cc">
+            <div class="cc-icon" style="background:rgba(37,99,235,.12);color:var(--primary-light);"><i class="fas fa-envelope"></i></div>
+            <div><div class="cc-label">Email</div><div class="cc-value">info@zentorix.com</div></div>
+          </div>
+          <div class="cc">
+            <div class="cc-icon" style="background:rgba(6,182,212,.12);color:var(--secondary-light);"><i class="fas fa-phone"></i></div>
+            <div><div class="cc-label">Phone / WhatsApp</div><div class="cc-value">+92-327-1763097</div></div>
+          </div>
+          <div class="cc">
+            <div class="cc-icon" style="background:rgba(139,92,246,.12);color:var(--accent-light);"><i class="fas fa-map-marker-alt"></i></div>
+            <div><div class="cc-label">Location</div><div class="cc-value">Lahore, Pakistan 🇵🇰</div></div>
+          </div>
+          <div class="cc">
+            <div class="cc-icon" style="background:rgba(16,185,129,.12);color:var(--success);"><i class="fas fa-clock"></i></div>
+            <div><div class="cc-label">Working Hours</div><div class="cc-value">Mon–Sun · 8 AM – 10 PM PST</div></div>
+          </div>
+        </div>
 
-    <!-- Sidebar (mobile menu) -->
-    <div class="sidebar" id="sidebar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#process">Process</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-        <a href="#contact" class="sidebar-cta">Get Started</a>
+        <div class="social-row">
+          <a href="#" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="soc-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/923271763097" class="soc-btn" aria-label="WhatsApp" style="background:#25D366; border-color:#25D366; color:#fff;"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <!-- Quick response promise -->
+        <div style="margin-top:2rem; background:rgba(37,99,235,.08); border:1px solid rgba(37,99,235,.2); border-radius:var(--radius); padding:1.4rem;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:.5rem;">
+            <i class="fas fa-bolt" style="color:var(--primary-light);"></i>
+            <strong style="font-size:.88rem;">Lightning-Fast Response</strong>
+          </div>
+          <p style="color:var(--text-secondary); font-size:.82rem; line-height:1.6;">We respond to all inquiries within <strong style="color:#fff;">24 hours</strong>. For urgent matters, reach us directly on WhatsApp.</p>
+        </div>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="floating-shape s1"></div>
-        <div class="floating-shape s2"></div>
-        <div class="floating-shape s3"></div>
-        <div class="hero-content">
-            <span class="hero-badge"> Engineering Digital Excellence</span>
-            <h1 class="hero-title">Building Digital Experiences That Drive Business Growth</h1>
-            <p class="hero-subtitle">Zentorix creates modern websites, software solutions, branding, and digital experiences that help businesses stand out and grow.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get Started <i class="fas fa-arrow-right"></i></a>
-                <a href="#portfolio" class="btn btn-outline">View Portfolio <i class="fas fa-eye"></i></a>
-            </div>
-        </div>
-    </section>
+<!-- ═══════════════════
+  NEWSLETTER
+═══════════════════ -->
+<div class="newsletter-section">
+  <span class="tag" style="margin-bottom:1rem; display:inline-flex;">Newsletter</span>
+  <h2 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.4rem); margin-bottom:.8rem;">Stay in the <span class="grad">Loop</span></h2>
+  <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:.95rem;">Get the latest in tech, design, and digital innovation — no spam, ever.</p>
+  <div class="nl-box">
+    <input type="email" id="nlEmail" class="nl-input" placeholder="your@email.com" />
+    <button class="btn btn-primary" id="nlBtn">Subscribe <i class="fas fa-arrow-right"></i></button>
+  </div>
+</div>
 
-    <!-- Stats -->
-    <section style="padding-top:0; padding-bottom:3rem;">
-        <div class="section-container">
-            <div class="stats-grid">
-                <div class="stat-item"><h3 class="counter" data-target="250">0</h3><p>Projects Delivered</p></div>
-                <div class="stat-item"><h3 class="counter" data-target="180">0</h3><p>Happy Clients</p></div>
-                <div class="stat-item"><h3 class="counter" data-target="7">0</h3><p>Years Experience</p></div>
-                <div class="stat-item"><h3 class="counter" data-target="50">0</h3><p>Team Members</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-        <div class="section-container">
-            <span class="section-tag">About Us</span>
-            <h2 class="section-title">Engineering the Future,<br>One Solution at a Time</h2>
-            <div class="section-line"></div>
-            <p class="section-subtitle">Zentorix is a full-service digital agency specializing in web development, software engineering, branding, and digital transformation.</p>
-            <br><br>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem;">
-                <div class="glass-card" style="padding:2rem; text-align:center;">
-                    <i class="fas fa-rocket" style="font-size:2.5rem; background:var(--gradient-1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
-                    <h3 style="font-family:var(--font-heading); margin-top:1rem;">Our Mission</h3>
-                    <p style="color:var(--text-secondary); font-size:0.9rem;">Empower businesses with cutting-edge digital solutions that drive measurable growth and lasting impact.</p>
-                </div>
-                <div class="glass-card" style="padding:2rem; text-align:center;">
-                    <i class="fas fa-eye" style="font-size:2.5rem; background:var(--gradient-2); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
-                    <h3 style="font-family:var(--font-heading); margin-top:1rem;">Our Vision</h3>
-                    <p style="color:var(--text-secondary); font-size:0.9rem;">To be the global standard for digital excellence.</p>
-                </div>
-                <div class="glass-card" style="padding:2rem; text-align:center;">
-                    <i class="fas fa-gem" style="font-size:2.5rem; background:var(--gradient-3); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
-                    <h3 style="font-family:var(--font-heading); margin-top:1rem;">Core Values</h3>
-                    <p style="color:var(--text-secondary); font-size:0.9rem;">Innovation, integrity, collaboration, and an unwavering commitment to quality.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" style="background:var(--bg-secondary);">
-        <div class="section-container">
-            <span class="section-tag">Services</span>
-            <h2 class="section-title">What We Build</h2>
-            <div class="section-line"></div>
-            <div class="services-grid">
-                <div class="glass-card service-card"><span class="icon">🌐</span><h3>Website Development</h3><p>Custom business, restaurant, clinic, real estate, school, portfolio & e-commerce websites.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-                <div class="glass-card service-card"><span class="icon">💻</span><h3>Software Development</h3><p>Desktop apps, enterprise software, management systems, POS, inventory, CRM & ERP solutions.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-                <div class="glass-card service-card"><span class="icon">📱</span><h3>Mobile Apps</h3><p>Native Android, iOS & cross-platform mobile applications built with modern frameworks.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-                <div class="glass-card service-card"><span class="icon">🎨</span><h3>UI/UX Design</h3><p>Brand identity, logo design, social media graphics & intuitive user experiences.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-                <div class="glass-card service-card"><span class="icon">📈</span><h3>SEO & Marketing</h3><p>Search engine optimization, Google Business Profile setup & digital marketing strategies.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-                <div class="glass-card service-card"><span class="icon">🛠️</span><h3>Support & Hosting</h3><p>Reliable hosting, domain management, technical support & ongoing maintenance.</p><a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section id="portfolio">
-        <div class="section-container">
-            <span class="section-tag">Portfolio</span>
-            <h2 class="section-title">Our Work</h2>
-            <div class="section-line"></div>
-            <div class="portfolio-grid">
-                
-<a href="https://dera-ali-akbar.netlify.app/" target="_blank" rel="noopener noreferrer" class="portfolio-item">
-    <div class="portfolio-placeholder"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHTPPGo9g_DgIYiC7pT9c0y_6KGk0D1tykW6zRwytfuw&s=10" alt="Restaurant Website"></div> 
-    <div class="portfolio-overlay">
-        <h4>Restaurant Website <br/> View</h4>
-        
+<!-- ═══════════════════
+  FOOTER
+═══════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="fl">Zentorix</span>
+      <p>Engineering Digital Excellence. Helping businesses grow through modern websites, software, branding, and digital innovation.</p>
+      <div class="social-row" style="margin-top:1.5rem;">
+        <a href="#" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="soc-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="soc-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
     </div>
-</a>      
-                <a href="https://cafe-and-co.netlify.app" target="_blank" rel="noopener noreferrer" class="portfolio-item">
-    <div class="portfolio-placeholder"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/b9/71/11/caption.jpg" alt="Restaurant Website"></div> 
-    <div class="portfolio-overlay">
-        <h4>Caffe <br/> View</h4>
-        
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#services">Web Development</a>
+      <a href="#services">Software</a>
+      <a href="#services">Mobile Apps</a>
+      <a href="#services">UI/UX Design</a>
+      <a href="#services">SEO &amp; Marketing</a>
     </div>
-</a> 
-                
-                <div class="portfolio-item"><div class="portfolio-placeholder">🏥</div><div class="portfolio-overlay"><h4>Healthcare System</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">🏫</div><div class="portfolio-overlay"><h4>Education Portal</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">🏢</div><div class="portfolio-overlay"><h4>Real Estate App</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">🏋️</div><div class="portfolio-overlay"><h4>Gym Management</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">⚖️</div><div class="portfolio-overlay"><h4>Law Firm Website</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">💼</div><div class="portfolio-overlay"><h4>Corporate Dashboard</h4></div></div>
-                <div class="portfolio-item"><div class="portfolio-placeholder">🔬</div><div class="portfolio-overlay"><h4>Technology Startup</h4></div></div>
-            </div>
-        </div>
-    </section>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#about">About Us</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#process">Process</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Zentorix. All rights reserved. Built with ❤️</p>
+    <p style="color:var(--text-muted); font-size:.74rem;">Engineering Digital Excellence — Lahore, Pakistan</p>
+  </div>
+</footer>
 
-    <!-- Process -->
-    <section id="process" style="background:var(--bg-secondary);">
-        <div class="section-container">
-            <span class="section-tag">Process</span>
-            <h2 class="section-title">How We Work</h2>
-            <div class="section-line"></div>
-            <div style="position:relative;">
-                <div class="process-line"></div>
-                <div class="process-steps">
-                    <div class="process-step glass-card"><div class="step-number">01</div><h4>Discover</h4><p>Understanding your goals</p></div>
-                    <div class="process-step glass-card"><div class="step-number">02</div><h4>Research</h4><p>Market analysis</p></div>
-                    <div class="process-step glass-card"><div class="step-number">03</div><h4>Design</h4><p>Beautiful interfaces</p></div>
-                    <div class="process-step glass-card"><div class="step-number">04</div><h4>Development</h4><p>Robust solutions</p></div>
-                    <div class="process-step glass-card"><div class="step-number">05</div><h4>Testing</h4><p>Quality assurance</p></div>
-                    <div class="process-step glass-card"><div class="step-number">06</div><h4>Launch</h4><p>Smooth deployment</p></div>
-                    <div class="process-step glass-card"><div class="step-number">07</div><h4>Support</h4><p>Ongoing maintenance</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Floating buttons -->
+<a href="https://wa.me/923271763097" class="fab-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<button class="fab-top" id="fabTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
-    <!-- Testimonials -->
-    <section id="testimonials">
-        <div class="section-container">
-            <span class="section-tag">Testimonials</span>
-            <h2 class="section-title">Client Success Stories</h2>
-            <div class="section-line"></div>
-            <div class="testimonials-scroll">
-                <div class="testimonial-card glass-card"><div class="stars">★★★★★</div><p>"Zentorix transformed our online presence completely. Our website now converts 3x more visitors."</p><div class="testimonial-author">Ahmed Khan</div><div class="testimonial-role">CEO, TechVentures</div></div>
-                <div class="testimonial-card glass-card"><div class="stars">★★★★★</div><p>"The custom ERP system they built streamlined our entire operation."</p><div class="testimonial-author">Sarah Mahmood</div><div class="testimonial-role">Operations Director, MedCare</div></div>
-                <div class="testimonial-card glass-card"><div class="stars">★★★★★</div><p>"Professional, innovative, and incredibly responsive."</p><div class="testimonial-author">Zain Ali</div><div class="testimonial-role">Founder, EduPlatform</div></div>
-                <div class="testimonial-card glass-card"><div class="stars">★★★★★</div><p>"Our restaurant's online ordering system increased revenue by 40% in two months."</p><div class="testimonial-author">Fatima Raza</div><div class="testimonial-role">Owner, Bistro Luxe</div></div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Pricing -->
-    <section id="pricing" style="background:var(--bg-secondary);">
-        <div class="section-container">
-            <span class="section-tag">Pricing</span>
-            <h2 class="section-title">Investment Plans</h2>
-            <div class="section-line"></div>
-            <div class="pricing-grid">
-                <div class="pricing-card glass-card"><h3 style="font-family:var(--font-heading);">Starter</h3><div class="price">$60<span>/project</span></div><ul><li><i class="fas fa-check"></i> 5-Page Website</li><li><i class="fas fa-check"></i> Responsive Design</li><li><i class="fas fa-check"></i> Basic SEO</li><li><i class="fas fa-check"></i> Contact Form</li><li><i class="fas fa-check"></i> Animation</li><li><i class="fas fa-check"></i> 1 Month Support</li></ul><a href="#contact" class="btn btn-outline" style="width:100%;">Get Started</a></div>
-                <div class="pricing-card glass-card featured"><div class="pricing-badge">Most Popular</div><h3 style="font-family:var(--font-heading);">Professional</h3><div class="price">$200<span>/project</span></div><ul><li><i class="fas fa-check"></i> Up to 15 Pages</li><li><i class="fas fa-check"></i> Custom Design</li><li><i class="fas fa-check"></i> Advanced SEO</li><li><i class="fas fa-check"></i> CMS Integration</li><li><i class="fas fa-check"></i> E-Commerce Ready</li><li><i class="fas fa-check"></i> 6 Months Support</li></ul><a href="#contact" class="btn btn-primary" style="width:100%;">Get Started</a></div>
-                <div class="pricing-card glass-card"><h3 style="font-family:var(--font-heading);">Enterprise</h3><div class="price">$400<span>/project</span></div><ul><li><i class="fas fa-check"></i> Unlimited Pages</li><li><i class="fas fa-check"></i> Custom Web App</li><li><i class="fas fa-check"></i> Full SEO Suite</li><li><i class="fas fa-check"></i> API Integrations</li><li><i class="fas fa-check"></i> Advanced Security</li><li><i class="fas fa-check"></i> 12 Months Support</li></ul><a href="#contact" class="btn btn-accent" style="width:100%;">Get Started</a></div>
-            </div>
-        </div>
-    </section>
+<!-- ═══════════════════════════════════════
+  JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+/* ── Loader ── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+  }, 1600);
+});
 
-    <!-- Blog -->
-    <section id="blog">
-        <div class="section-container">
-            <span class="section-tag">Blog</span>
-            <h2 class="section-title">Insights & Ideas</h2>
-            <div class="section-line"></div>
-            <div class="blog-grid">
-                <div class="blog-card glass-card"><div class="blog-card-image">🤖</div><div class="blog-card-content"><span class="category">AI</span><h4>How AI Is Transforming Business Software</h4><p>Explore the latest AI trends reshaping enterprise solutions.</p></div></div>
-                <div class="blog-card glass-card"><div class="blog-card-image">🎨</div><div class="blog-card-content"><span class="category">Web Design</span><h4>Minimalist Design: Less Is More</h4><p>Clean interfaces that convert better and load faster.</p></div></div>
-                <div class="blog-card glass-card"><div class="blog-card-image">📈</div><div class="blog-card-content"><span class="category">Marketing</span><h4>SEO Strategies That Work in 2024</h4><p>Proven techniques to rank higher and attract more traffic.</p></div></div>
-            </div>
-        </div>
-    </section>
+/* ── Custom cursor ── */
+if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  const dot = document.getElementById('cDot');
+  const ring = document.getElementById('cRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-    <!-- FAQ -->
-    <section id="faq" style="background:var(--bg-secondary);">
-        <div class="section-container" style="max-width:800px;">
-            <span class="section-tag">FAQ</span>
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="section-line"></div>
-            <div class="faq-item"><div class="faq-question">What services does Zentorix offer? <i class="fas fa-plus"></i></div><div class="faq-answer">We offer website development, software engineering, mobile apps, UI/UX design, SEO, branding, hosting, and ongoing technical support.</div></div>
-            <div class="faq-item"><div class="faq-question">How long does a typical project take? <i class="fas fa-plus"></i></div><div class="faq-answer">Timelines vary by project scope. A standard website takes 2-4 weeks, while complex software solutions may take 8-16 weeks.</div></div>
-            <div class="faq-item"><div class="faq-question">Do you offer post-launch support? <i class="fas fa-plus"></i></div><div class="faq-answer">Absolutely. All our packages include a support period, and we offer extended maintenance plans.</div></div>
-            <div class="faq-item"><div class="faq-question">Can you work with our existing systems? <i class="fas fa-plus"></i></div><div class="faq-answer">Yes, we specialize in integrations with existing CRM, ERP, or third-party APIs.</div></div>
-        </div>
-    </section>
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+  });
 
-    <!-- Contact -->
-    <section id="contact">
-        <div class="section-container">
-            <span class="section-tag">Contact</span>
-            <h2 class="section-title">Let's Build Something Great</h2>
-            <div class="section-line"></div>
-            <div class="contact-grid">
-                <div>
-                    <form id="contactForm" class="contact-form">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-                            <input type="text" name="name" placeholder="Your Name *" required>
-                            <input type="email" name="email" placeholder="Email Address *" required>
-                        </div>
-                        <input type="text" name="subject" placeholder="Subject" style="margin-bottom:1rem;">
-                        <select name="service" style="margin-bottom:1rem;">
-                            <option value="">Select Service</option>
-                            <option value="website">Website Development</option>
-                            <option value="software">Software Development</option>
-                            <option value="mobile">Mobile Apps</option>
-                            <option value="design">UI/UX Design</option>
-                            <option value="seo">SEO & Marketing</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <textarea name="message" placeholder="Tell us about your project..."></textarea>
-                        <button type="submit" class="btn btn-primary" style="margin-top:1rem; width:100%;">Send Message <i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="glass-card" style="padding:1.5rem;"><i class="fas fa-envelope" style="color:var(--primary-light); font-size:1.5rem;"></i><p style="margin-top:0.5rem; font-weight:600;">info@zentorix.com</p></div>
-                    <div class="glass-card" style="padding:1.5rem;"><i class="fas fa-phone" style="color:var(--secondary-light); font-size:1.5rem;"></i><p style="margin-top:0.5rem; font-weight:600;">+92-327-1763097</p></div>
-                    <div class="glass-card" style="padding:1.5rem;"><i class="fas fa-map-marker-alt" style="color:var(--accent-light); font-size:1.5rem;"></i><p style="margin-top:0.5rem; font-weight:600;">Lahore, PK</p></div>
-                    <div class="glass-card" style="padding:1.5rem;"><i class="fas fa-clock" style="color:var(--primary-light); font-size:1.5rem;"></i><p style="margin-top:0.5rem; font-weight:600;">Mon-Sun: 8AM - 10PM PST</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
+  (function animRing() {
+    rx += (mx - rx) * 0.13;
+    ry += (my - ry) * 0.13;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
 
-    <!-- Newsletter -->
-    <section style="background:var(--bg-secondary); text-align:center; padding:4rem 1.5rem;">
-        <div class="section-container" style="max-width:600px;">
-            <h2 class="section-title" style="font-size:2rem;">Stay Updated</h2>
-            <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Subscribe to our newsletter for the latest in tech, design, and digital innovation.</p>
-            <div class="newsletter-box">
-                <input type="email" id="newsletterEmail" placeholder="Enter your email">
-                <button type="button" id="newsletterBtn" class="btn btn-primary">Subscribe</button>
-            </div>
-        </div>
-    </section>
+  document.querySelectorAll('a, button, .service-card, .pricing-card, .blog-card, .faq-q, .testi-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+  });
+} else {
+  document.getElementById('cDot').style.display  = 'none';
+  document.getElementById('cRing').style.display = 'none';
+}
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">Zentorix</div>
-                <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:0.8rem;">Engineering Digital Excellence. Helping businesses grow through modern websites, software, branding, and digital innovation.</p>
-                <div style="display:flex; gap:1rem; margin-top:1.5rem;">
-                    <a href="#" style="font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" style="font-size:1.2rem;"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" style="font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="font-size:1.2rem;"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div><h5>Services</h5><a href="#services">Web Development</a><a href="#services">Software</a><a href="#services">Mobile Apps</a><a href="#services">UI/UX Design</a><a href="#services">SEO</a></div>
-            <div><h5>Company</h5><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#process">Process</a><a href="#blog">Blog</a><a href="#contact">Contact</a></div>
-            <div><h5>Legal</h5><a href="privacy-policy.html" target="_blank">Privacy Policy</a><a href="terms-of-service.html" target="_blank">Terms of Service</a><a href="cookie-policy.html" target="_blank">Cookie Policy</a></div>
-        </div>
-        <div style="text-align:center; margin-top:3rem; padding-top:2rem; border-top:1px solid var(--glass-border); color:var(--text-muted); font-size:0.8rem;">
-            &copy; 2024 Zentorix. All rights reserved.
-        </div>
-    </footer>
+/* ── Particles ── */
+if (!('ontouchstart' in window)) {
+  const c = document.getElementById('particlesCanvas');
+  const ctx = c.getContext('2d');
+  const resize = () => { c.width = window.innerWidth; c.height = window.innerHeight; };
+  resize(); window.addEventListener('resize', resize);
 
-    <!-- Back to Top & WhatsApp -->
-    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
-    <a href="https://wa.me/+923271763097" class="floating-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+  const count = 70;
+  const pts = Array.from({length: count}, () => ({
+    x: Math.random() * c.width,
+    y: Math.random() * c.height,
+    vx: (Math.random() - .5) * .45,
+    vy: (Math.random() - .5) * .45,
+    r:  Math.random() * 1.5 + .4,
+    a:  Math.random() * .45 + .15,
+  }));
 
-    <script>
-        // Loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-                document.body.classList.remove('loading');
-            }, 1500);
-        });
+  (function anim() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > c.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > c.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(96,165,250,${p.a})`;
+      ctx.fill();
+    });
+    for (let i = 0; i < count; i++) for (let j = i + 1; j < count; j++) {
+      const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        ctx.beginPath();
+        ctx.moveTo(pts[i].x, pts[i].y);
+        ctx.lineTo(pts[j].x, pts[j].y);
+        ctx.strokeStyle = `rgba(37,99,235,${.07 * (1 - d / 110)})`;
+        ctx.lineWidth = .6;
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(anim);
+  })();
+} else {
+  document.getElementById('particlesCanvas').style.display = 'none';
+}
 
-        // Custom cursor (only non‑touch)
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            const dot = document.getElementById('cursorDot');
-            const ring = document.getElementById('cursorRing');
-            let mx = 0, my = 0, rx = 0, ry = 0;
-            document.addEventListener('mousemove', e => {
-                mx = e.clientX; my = e.clientY;
-                dot.style.left = mx - 4 + 'px';
-                dot.style.top = my - 4 + 'px';
-            });
-            function animateRing() {
-                rx += (mx - rx) * 0.12;
-                ry += (my - ry) * 0.12;
-                ring.style.left = rx - 18 + 'px';
-                ring.style.top = ry - 18 + 'px';
-                requestAnimationFrame(animateRing);
-            }
-            animateRing();
-            document.querySelectorAll('a, button, .glass-card, .portfolio-item, .faq-item').forEach(el => {
-                el.addEventListener('mouseenter', () => { ring.style.width='50px'; ring.style.height='50px'; ring.style.borderColor='rgba(37,99,235,0.7)'; ring.style.marginLeft='-7px'; ring.style.marginTop='-7px'; });
-                el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(255,255,255,0.4)'; ring.style.marginLeft='0'; ring.style.marginTop='0'; });
-            });
-        } else {
-            document.getElementById('cursorDot').style.display = 'none';
-            document.getElementById('cursorRing').style.display = 'none';
-        }
+/* ── Marquee ── */
+const techItems = [
+  {icon:'fab fa-react',      label:'React'},
+  {icon:'fab fa-node-js',    label:'Node.js'},
+  {icon:'fab fa-python',     label:'Python'},
+  {icon:'fab fa-laravel',    label:'Laravel'},
+  {icon:'fab fa-vuejs',      label:'Vue.js'},
+  {icon:'fab fa-angular',    label:'Angular'},
+  {icon:'fas fa-database',   label:'MongoDB'},
+  {icon:'fab fa-docker',     label:'Docker'},
+  {icon:'fab fa-aws',        label:'AWS'},
+  {icon:'fab fa-figma',      label:'Figma'},
+  {icon:'fab fa-wordpress',  label:'WordPress'},
+  {icon:'fab fa-flutter',    label:'Flutter'},
+];
 
-        // Particles (off for touch)
-        if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
-            const canvas = document.getElementById('particlesCanvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-            resize(); window.addEventListener('resize', resize);
-            class Particle {
-                constructor() { this.reset(); }
-                reset() { this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*2+0.5; this.speedX=(Math.random()-0.5)*0.5; this.speedY=(Math.random()-0.5)*0.5; this.opacity=Math.random()*0.5+0.2; }
-                update() { this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height) this.reset(); }
-                draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle=`rgba(37,99,235,${this.opacity})`; ctx.fill(); }
-            }
-            for(let i=0;i<80;i++) particles.push(new Particle());
-            function animateParticles() {
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
-                    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
-                    if(dist<120) { ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(37,99,235,${0.06*(1-dist/120)})`; ctx.lineWidth=0.5; ctx.stroke(); }
-                }
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
-        } else {
-            document.getElementById('particlesCanvas').style.display = 'none';
-        }
+const track = document.getElementById('marqueeTrack');
+const doubled = [...techItems, ...techItems];
+doubled.forEach(t => {
+  const el = document.createElement('div');
+  el.className = 'marquee-item';
+  el.innerHTML = `<i class="${t.icon}"></i>${t.label}`;
+  track.appendChild(el);
+});
 
-        // Navbar scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
-            updateActiveNav();
-        });
+/* ── Typed text ── */
+const phrases = ['Experiences.', 'Solutions.', 'Products.', 'Innovations.', 'Success.'];
+let pi = 0, ci = 0, deleting = false;
+const typedEl = document.getElementById('typedText');
+function type() {
+  const cur = phrases[pi];
+  if (!deleting) {
+    typedEl.textContent = cur.slice(0, ++ci);
+    if (ci === cur.length) { deleting = true; setTimeout(type, 2000); return; }
+  } else {
+    typedEl.textContent = cur.slice(0, --ci);
+    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+  }
+  setTimeout(type, deleting ? 60 : 100);
+}
+type();
 
-        // ───── SIDEBAR TOGGLE ─────
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-        const backdrop = document.getElementById('sidebarBackdrop');
+/* ── Navbar ── */
+const navbar  = document.getElementById('navbar');
+const fabTop  = document.getElementById('fabTop');
+const navLinks = document.querySelectorAll('.nav-links a');
 
-        function openSidebar() {
-            hamburger.classList.add('active');
-            sidebar.classList.add('active');
-            backdrop.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeSidebar() {
-            hamburger.classList.remove('active');
-            sidebar.classList.remove('active');
-            backdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', scrollY > 50);
+  fabTop.classList.toggle('show', scrollY > 600);
+  highlightNav();
+});
 
-        hamburger.addEventListener('click', () => {
-            if (sidebar.classList.contains('active')) closeSidebar();
-            else openSidebar();
-        });
+function highlightNav() {
+  const sections = document.querySelectorAll('section[id]');
+  let cur = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}
 
-        backdrop.addEventListener('click', closeSidebar);
+/* ── Hamburger / Sidebar ── */
+const hamburger = document.getElementById('hamburger');
+const sidebar   = document.getElementById('sidebar');
+const backdrop  = document.getElementById('backdrop');
 
-        // Close sidebar when a link is clicked
-        document.querySelectorAll('.sidebar a').forEach(link => {
-            link.addEventListener('click', () => {
-                closeSidebar();
-                // Smooth scroll handled by the general anchor handler
-            });
-        });
+function openSidebar()  { hamburger.classList.add('active'); sidebar.classList.add('active'); backdrop.classList.add('active'); document.body.classList.add('no-scroll'); }
+function closeSidebar() { hamburger.classList.remove('active'); sidebar.classList.remove('active'); backdrop.classList.remove('active'); document.body.classList.remove('no-scroll'); }
 
-        // Back to top
-        document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+hamburger.addEventListener('click', () => sidebar.classList.contains('active') ? closeSidebar() : openSidebar());
+backdrop.addEventListener('click', closeSidebar);
+document.querySelectorAll('.sidebar a').forEach(a => a.addEventListener('click', closeSidebar));
 
-        // FAQ
-        document.querySelectorAll('.faq-item').forEach(item => item.addEventListener('click', function() {
-            const wasActive = this.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-            if(!wasActive) this.classList.add('active');
-        }));
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
 
-        // Counters
-        function animateCounters() {
-            document.querySelectorAll('.counter').forEach(counter => {
-                const target = parseInt(counter.dataset.target);
-                const duration = 2000;
-                const start = performance.now();
-                function update(now) {
-                    const progress = Math.min((now-start)/duration, 1);
-                    const current = Math.floor(progress * target);
-                    counter.textContent = current + (target>=50?'+':'');
-                    if(progress<1) requestAnimationFrame(update); else counter.textContent = target + (target>=50?'+':'');
-                }
-                requestAnimationFrame(update);
-            });
-        }
-        const statsObs = new IntersectionObserver(entries => {
-            if(entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
-        }, { threshold:0.5 });
-        const statsSection = document.querySelector('.stats-grid');
-        if(statsSection) statsObs.observe(statsSection);
+/* ── Back to top ── */
+fabTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-        function updateActiveNav() {
-            const sections = document.querySelectorAll('section[id]');
-            const links = document.querySelectorAll('.nav-links a');
-            let current = '';
-            sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
-            links.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('href') === '#'+current) link.classList.add('active');
-            });
-        }
+/* ── FAQ ── */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth' }); }
-        }));
+/* ── Testimonials carousel ── */
+const track2 = document.getElementById('testiTrack');
+const cards  = track2.querySelectorAll('.testi-card');
+let tIdx = 0;
 
-        // Contact form
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            const orig = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-            try {
-                const res = await fetch('https://formspree.io/f/mgogzykb', { method:'POST', headers:{'Accept':'application/json'}, body: new FormData(this) });
-                if(res.ok) { btn.innerHTML = '<i class="fas fa-check"></i> Sent!'; btn.style.background='#10B981'; this.reset(); }
-                else throw new Error('Failed');
-            } catch { btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error'; btn.style.background='#EF4444'; }
-            setTimeout(() => { btn.innerHTML = orig; btn.style.background=''; btn.disabled = false; }, 4000);
-        });
+function getVisible() {
+  if (window.innerWidth >= 1200) return 3;
+  if (window.innerWidth >= 768)  return 2;
+  return 1;
+}
 
-        // Newsletter
-        document.getElementById('newsletterBtn').addEventListener('click', () => {
-            const email = document.getElementById('newsletterEmail').value.trim();
-            if(email) { alert('Thank you! We\'ll notify you when the newsletter is live.'); document.getElementById('newsletterEmail').value = ''; }
-            else alert('Please enter a valid email.');
-        });
+function moveTesti(dir) {
+  const max = cards.length - getVisible();
+  tIdx = Math.max(0, Math.min(tIdx + dir, max));
+  const w = cards[0].offsetWidth + 24; // gap = 1.5rem = 24px
+  track2.style.transform = `translateX(-${tIdx * w}px)`;
+}
 
-        // Fade-up animations
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold:0.1 });
-        document.querySelectorAll('.glass-card, .service-card, .portfolio-item, .blog-card, .pricing-card').forEach(el => {
-            el.classList.add('fade-up');
-            observer.observe(el);
-        });
+document.getElementById('testiPrev').addEventListener('click', () => moveTesti(-1));
+document.getElementById('testiNext').addEventListener('click', () => moveTesti(1));
 
-        console.log('%c Zentorix %c Engineering Digital Excellence ', 'background:#2563EB;color:#fff;padding:10px 16px;', 'background:#050816;color:#B0B8CC;padding:10px 16px;');
-    </script>
+// Auto-advance every 5s
+setInterval(() => {
+  const max = cards.length - getVisible();
+  tIdx = tIdx >= max ? 0 : tIdx + 1;
+  const w = cards[0].offsetWidth + 24;
+  track2.style.transform = `translateX(-${tIdx * w}px)`;
+}, 5000);
+
+window.addEventListener('resize', () => {
+  track2.style.transform = 'translateX(0)';
+  tIdx = 0;
+});
+
+/* ── Counter animation ── */
+function runCounters() {
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = +el.dataset.target;
+    const dur    = 2200;
+    const start  = performance.now();
+    function update(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target) + (target >= 7 ? '+' : '');
+      if (p < 1) requestAnimationFrame(update);
+      else el.textContent = target + (target >= 7 ? '+' : '');
+    }
+    requestAnimationFrame(update);
+  });
+}
+new IntersectionObserver(([e], o) => { if (e.isIntersecting) { runCounters(); o.disconnect(); } }, {threshold:.5}).observe(document.querySelector('.stats-inner'));
+
+/* ── Portfolio filter ── */
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.p-item').forEach(item => {
+      const cat = item.dataset.cat || 'all';
+      item.style.display = (f === 'all' || cat === f) ? 'block' : 'none';
+    });
+  });
+});
+
+/* ── Scroll reveal ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const siblings = [...(e.target.parentElement?.children || [])].filter(el => el.classList.contains('reveal'));
+      const idx = siblings.indexOf(e.target);
+      setTimeout(() => e.target.classList.add('visible'), idx * 70);
+      ro.unobserve(e.target);
+    }
+  });
+}, {threshold:.1, rootMargin:'0px 0px -50px 0px'});
+
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── Toast ── */
+function toast(msg, type = 'success') {
+  const wrap = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
+  wrap.appendChild(t);
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 400); }, 4000);
+}
+
+/* ── Contact form ── */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/mgogzykb', {
+      method: 'POST',
+      headers: {Accept: 'application/json'},
+      body: new FormData(this),
+    });
+    if (res.ok) {
+      toast('Message sent! We\'ll get back to you within 24 hours. 🎉');
+      this.reset();
+    } else throw new Error();
+  } catch {
+    toast('Something went wrong. Please try again or WhatsApp us directly.', 'error');
+  }
+  btn.innerHTML = orig;
+  btn.disabled = false;
+});
+
+/* ── Newsletter ── */
+document.getElementById('nlBtn').addEventListener('click', () => {
+  const v = document.getElementById('nlEmail').value.trim();
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+    toast('You\'re subscribed! Welcome to the Zentorix newsletter. 🚀');
+    document.getElementById('nlEmail').value = '';
+  } else {
+    toast('Please enter a valid email address.', 'error');
+  }
+});
+
+console.log('%c ⚡ Zentorix %c Engineering Digital Excellence', 'background:#2563EB;color:#fff;padding:8px 12px;border-radius:4px 0 0 4px;font-weight:700;', 'background:#050816;color:#60A5FA;padding:8px 12px;border-radius:0 4px 4px 0;');
+</script>
 </body>
 </html>
